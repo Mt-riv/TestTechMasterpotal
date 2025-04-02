@@ -10,4 +10,46 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+}
+
+@layer components {
+  .gradient-heading {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-500;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-primary/50;
+  }
+
+  .icon-gradient {
+    @apply bg-gradient-to-br from-primary to-purple-500 text-white p-3 rounded-lg;
+  }
+
+  .category-badge {
+    @apply px-3 py-1 text-xs font-medium rounded-full shadow-sm;
+  }
+
+  .button-gradient {
+    @apply bg-gradient-to-r from-primary to-purple-500 hover:from-primary/90 hover:to-purple-500/90 text-white font-bold py-2 px-4 rounded-md transition-all duration-300;
+  }
+
+  .section-title {
+    @apply text-2xl font-bold mb-6 pb-2 border-b border-gray-200 dark:border-gray-700;
+  }
 }

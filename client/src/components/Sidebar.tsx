@@ -47,21 +47,21 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`fixed inset-y-0 left-0 z-10 w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 pt-16 pb-4 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:h-auto overflow-y-auto flex-shrink-0 ${
+      className={`fixed inset-y-0 left-0 z-10 w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 pt-16 pb-4 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:h-auto overflow-y-auto flex-shrink-0 shadow-lg ${
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
       <div className="px-4 mt-6">
-        <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider dark:text-gray-400">カテゴリー</h3>
-        <div className="mt-2 -mx-3 space-y-1">
+        <h3 className="text-sm font-bold text-primary uppercase tracking-wider px-3 mb-2">カテゴリー</h3>
+        <div className="mt-2 space-y-1">
           {categories.map((category) => (
             <Link key={category.id} href={category.id === 'all' ? '/' : `/category/${category.id}`}>
               <a
                 onClick={() => handleCategoryClick(category.id)}
-                className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-md ${
+                className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all ${
                   categoryFilter === category.id
-                    ? "bg-primary-50 text-primary-600 dark:bg-primary-900 dark:bg-opacity-20 dark:text-primary-400"
-                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-200"
+                    ? "bg-gradient-to-r from-primary/15 to-purple-500/15 text-primary-600 dark:text-primary-400 font-bold"
+                    : "text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400"
                 }`}
               >
                 {getCategoryIcon(category.id)}
@@ -73,11 +73,11 @@ const Sidebar = () => {
       </div>
 
       <div className="px-4 mt-8">
-        <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider dark:text-gray-400">人気の技法</h3>
-        <div className="mt-2 -mx-3 space-y-1">
+        <h3 className="text-sm font-bold text-primary uppercase tracking-wider px-3 mb-2">人気の技法</h3>
+        <div className="mt-2 space-y-1">
           {popularTechniques.map(technique => (
             <Link key={technique.id} href={`/technique/${technique.id}`}>
-              <a className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-200">
+              <a className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400 transition-all">
                 {getTechniqueIcon(technique.id)}
                 <span>{technique.name}</span>
               </a>
@@ -87,20 +87,28 @@ const Sidebar = () => {
       </div>
 
       <div className="px-4 mt-8">
-        <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider dark:text-gray-400">リソース</h3>
-        <div className="mt-2 -mx-3 space-y-1">
-          <a href="#" className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-200">
-            <Book className="mr-3 h-5 w-5 text-gray-400" />
+        <h3 className="text-sm font-bold text-primary uppercase tracking-wider px-3 mb-2">リソース</h3>
+        <div className="mt-2 space-y-1">
+          <a href="#" className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400 transition-all">
+            <Book className="mr-3 h-5 w-5 text-primary/70" />
             <span>テスト技法ガイド</span>
           </a>
-          <a href="#" className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-200">
-            <GraduationCap className="mr-3 h-5 w-5 text-gray-400" />
+          <a href="#" className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400 transition-all">
+            <GraduationCap className="mr-3 h-5 w-5 text-primary/70" />
             <span>学習パス</span>
           </a>
-          <a href="#" className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-200">
-            <ExternalLink className="mr-3 h-5 w-5 text-gray-400" />
+          <a href="#" className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400 transition-all">
+            <ExternalLink className="mr-3 h-5 w-5 text-primary/70" />
             <span>外部リンク集</span>
           </a>
+        </div>
+      </div>
+      
+      <div className="px-4 mt-12">
+        <div className="bg-gradient-to-r from-primary/10 to-purple-500/10 rounded-lg p-4">
+          <h4 className="font-bold text-gray-800 dark:text-gray-200 mb-2">テスト技法の学習</h4>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">体系的なテスト設計で品質を向上させましょう</p>
+          <button className="button-gradient text-xs py-1 w-full">ガイドを見る</button>
         </div>
       </div>
     </aside>
