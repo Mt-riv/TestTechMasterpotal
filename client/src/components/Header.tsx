@@ -18,7 +18,7 @@ const Header = () => {
               <Menu className="h-5 w-5" />
             </button>
             <h1 className="ml-3 text-xl font-bold gradient-heading">
-              ソフトウェアテスト技法ライブラリ
+              ソフトウェアテスト技法ライブラリ by YamaY
             </h1>
           </div>
           <div className="flex items-center">

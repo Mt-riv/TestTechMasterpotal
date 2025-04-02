@@ -80,7 +80,7 @@ const Home = () => {
   return (
     <div className="max-w-3xl mx-auto">
       <div className="text-center mb-12">
-        <h1 className="gradient-heading mb-4">ソフトウェアテスト技法を体系的に学ぶ</h1>
+        <h1 className="gradient-heading mb-4 text-2xl md:text-3xl">ソフトウェアテスト技法を体系的に学ぶ</h1>
         <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">効果的なテストケース設計のための様々な技法を探索してください</p>
       </div>
 
@@ -307,7 +307,7 @@ const Home = () => {
 
       {/* Footer */}
       <footer className="mt-12 text-center p-6 bg-gradient-to-r from-primary/5 to-purple-500/5 rounded-lg">
-        <p className="font-medium text-gray-700 dark:text-gray-300">© {new Date().getFullYear()} ソフトウェアテスト技法ライブラリ. All rights reserved.</p>
+        <p className="font-medium text-gray-700 dark:text-gray-300">© {new Date().getFullYear()} ソフトウェアテスト技法ライブラリ by YamaY. All rights reserved.</p>
         <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">参考文献：ISTQB Foundation Level Syllabus, IEEE 829, ISO/IEC/IEEE 29119</p>
       </footer>
     </div>
