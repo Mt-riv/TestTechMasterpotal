@@ -46,7 +46,7 @@ const CategoryView = () => {
       <div className="grid gap-4 md:grid-cols-2">
         {filteredTechniques.map((technique) => (
           <Link key={technique.id} href={`/technique/${technique.id}`}>
-            <a className="bg-white shadow rounded-lg cursor-pointer hover:shadow-md transition duration-150 border border-gray-200">
+            <a className="technique-item bg-white shadow rounded-lg cursor-pointer hover:shadow-md transition duration-150 border border-gray-200">
               <div className="p-4">
                 <div className="flex justify-between items-start">
                   <h3 className="text-lg font-medium text-gray-900">{technique.name}</h3>

@@ -1,6 +1,12 @@
+import { HelpCircle } from "lucide-react";
 import SearchBar from "./SearchBar";
+import { Button } from "@/components/ui/button";
+import { useTutorial } from "@/context/TutorialContext";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const Header = () => {
+  const { openTutorial, hasCompletedTutorial } = useTutorial();
+
   return (
     <header className="bg-white shadow-md border-b border-gray-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -10,10 +16,31 @@ const Header = () => {
               ソフトウェアテスト技法ライブラリ by YamaY
             </h1>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center space-x-4">
             <div className="hidden sm:block">
               <SearchBar />
             </div>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="rounded-full"
+                    onClick={openTutorial}
+                    aria-label="チュートリアルを開始"
+                  >
+                    <HelpCircle className="h-5 w-5" />
+                    {!hasCompletedTutorial && (
+                      <span className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full animate-pulse" />
+                    )}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>チュートリアルを開始</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
         </div>
       </div>

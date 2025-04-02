@@ -4,11 +4,25 @@ import { AppContext } from "../context/AppContext";
 import { categories } from "../data/categories";
 import { techniques } from "../data/techniques";
 import { filterTechniques } from "../hooks/useSearch";
+import { useTutorial } from "../context/TutorialContext";
 import { CheckCircle, Box, Code, Lightbulb, Puzzle, ChevronRight } from "lucide-react";
 
 const Home = () => {
   const { searchQuery, categoryFilter, setCategoryFilter } = useContext(AppContext);
+  const { openTutorial, hasCompletedTutorial } = useTutorial();
   const [, setLocation] = useLocation();
+  
+  // Auto-start tutorial for first-time users
+  useEffect(() => {
+    if (!hasCompletedTutorial) {
+      // Small delay to let the page render first
+      const timeoutId = setTimeout(() => {
+        openTutorial();
+      }, 1000);
+      
+      return () => clearTimeout(timeoutId);
+    }
+  }, [hasCompletedTutorial, openTutorial]);
 
   // If there's a search query or category filter (not 'all'), show filtered results
   const shouldShowFilteredResults = searchQuery || (categoryFilter !== 'all');
@@ -89,7 +103,7 @@ const Home = () => {
         {/* BlackBox Testing Card */}
         <div 
           onClick={() => handleCategoryClick('blackbox')} 
-          className="card-hover bg-white dark:bg-gray-800 overflow-hidden shadow-md rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700"
+          className="category-card card-hover bg-white dark:bg-gray-800 overflow-hidden shadow-md rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700"
         >
           <div className="p-5">
             <div className="flex items-center">
@@ -129,7 +143,7 @@ const Home = () => {
         {/* WhiteBox Testing Card */}
         <div 
           onClick={() => handleCategoryClick('whitebox')} 
-          className="card-hover bg-white dark:bg-gray-800 overflow-hidden shadow-md rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700"
+          className="category-card card-hover bg-white dark:bg-gray-800 overflow-hidden shadow-md rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700"
         >
           <div className="p-5">
             <div className="flex items-center">
@@ -169,7 +183,7 @@ const Home = () => {
         {/* Experience Based Testing Card */}
         <div 
           onClick={() => handleCategoryClick('experience')}
-          className="card-hover bg-white dark:bg-gray-800 overflow-hidden shadow-md rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700"
+          className="category-card card-hover bg-white dark:bg-gray-800 overflow-hidden shadow-md rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700"
         >
           <div className="p-5">
             <div className="flex items-center">
@@ -209,7 +223,7 @@ const Home = () => {
         {/* Specialized Testing Card */}
         <div 
           onClick={() => handleCategoryClick('specialized')}
-          className="card-hover bg-white dark:bg-gray-800 overflow-hidden shadow-md rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700"
+          className="category-card card-hover bg-white dark:bg-gray-800 overflow-hidden shadow-md rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700"
         >
           <div className="p-5">
             <div className="flex items-center">
