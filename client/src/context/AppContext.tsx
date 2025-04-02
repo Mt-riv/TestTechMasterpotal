@@ -84,7 +84,11 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   };
 
   const toggleSidebar = () => {
-    setIsSidebarOpen(prev => !prev);
+    setIsSidebarOpen(prev => {
+      const newState = !prev;
+      console.log("Toggling sidebar, current state:", prev, "new state:", newState);
+      return newState;
+    });
   };
 
   const value = {

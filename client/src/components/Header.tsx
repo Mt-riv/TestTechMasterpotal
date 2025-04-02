@@ -17,7 +17,10 @@ const Header = () => {
   const handleSidebarToggle = (e: React.MouseEvent) => {
     e.preventDefault();
     toggleSidebar();
-    console.log("Sidebar toggled:", !isSidebarOpen);
+    // 正確なログを出力するために少し遅延させる
+    setTimeout(() => {
+      console.log("Sidebar toggled, new state:", !isSidebarOpen);
+    }, 0);
   };
 
   return (

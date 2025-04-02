@@ -26,8 +26,8 @@ function App() {
   // サイドバーオーバーレイクリック処理
   const handleOverlayClick = (e: React.MouseEvent) => {
     e.preventDefault();
+    console.log("Sidebar overlay clicked, current state:", isSidebarOpen);
     toggleSidebar();
-    console.log("Sidebar overlay clicked, hiding sidebar");
   };
 
   return (
