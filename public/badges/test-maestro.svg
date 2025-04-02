@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E0C44A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B09030;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+      <feOffset dx="0" dy="0" result="offsetblur" />
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.5" />
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Golden badge background -->
+  <circle cx="100" cy="100" r="90" fill="url(#grad1)" stroke="#906020" stroke-width="4"/>
+  <circle cx="100" cy="100" r="75" fill="none" stroke="white" stroke-width="3" stroke-dasharray="1,3"/>
+  
+  <!-- Trophy icon -->
+  <g filter="url(#shadow)">
+    <!-- Trophy cup -->
+    <path d="M70,70 L130,70 L130,105 C130,115 110,125 100,125 C90,125 70,115 70,105 Z" fill="#FFD700" stroke="#906020" stroke-width="2"/>
+    
+    <!-- Trophy base -->
+    <rect x="85" y="125" width="30" height="10" fill="#FFD700" stroke="#906020" stroke-width="2"/>
+    <rect x="75" y="135" width="50" height="5" fill="#FFD700" stroke="#906020" stroke-width="2"/>
+    
+    <!-- Trophy handles -->
+    <path d="M70,80 C60,80 60,95 70,95" fill="none" stroke="#906020" stroke-width="2"/>
+    <path d="M130,80 C140,80 140,95 130,95" fill="none" stroke="#906020" stroke-width="2"/>
+    
+    <!-- Star on trophy -->
+    <polygon points="100,80 105,90 115,92 108,100 110,110 100,105 90,110 92,100 85,92 95,90" fill="white" stroke="#906020" stroke-width="1"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="100" y="155" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">テストマエストロ</text>
+</svg>

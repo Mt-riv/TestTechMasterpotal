@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E06B4A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B04530;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="90" fill="url(#grad1)" stroke="#902010" stroke-width="4"/>
+  <circle cx="100" cy="100" r="75" fill="none" stroke="white" stroke-width="3" stroke-dasharray="1,3"/>
+  
+  <!-- Number line representation -->
+  <line x1="40" y1="100" x2="160" y2="100" stroke="white" stroke-width="4"/>
+  
+  <!-- Tick marks -->
+  <line x1="50" y1="95" x2="50" y2="105" stroke="white" stroke-width="3"/>
+  <line x1="80" y1="95" x2="80" y2="105" stroke="white" stroke-width="3"/>
+  <line x1="110" y1="95" x2="110" y2="105" stroke="white" stroke-width="3"/>
+  <line x1="140" y1="95" x2="140" y2="105" stroke="white" stroke-width="3"/>
+  
+  <!-- Boundary value highlight -->
+  <circle cx="80" cy="100" r="10" fill="#FFD700" stroke="#902010" stroke-width="2"/>
+  <circle cx="110" cy="100" r="10" fill="#FFD700" stroke="#902010" stroke-width="2"/>
+  
+  <!-- Border arrows -->
+  <polygon points="35,100 45,95 45,105" fill="white"/>
+  <polygon points="165,100 155,95 155,105" fill="white"/>
+  
+  <!-- Values -->
+  <text x="50" y="90" font-family="Arial" font-size="14" font-weight="bold" fill="white" text-anchor="middle">0</text>
+  <text x="80" y="90" font-family="Arial" font-size="14" font-weight="bold" fill="#902010" text-anchor="middle">1</text>
+  <text x="110" y="90" font-family="Arial" font-size="14" font-weight="bold" fill="#902010" text-anchor="middle">10</text>
+  <text x="140" y="90" font-family="Arial" font-size="14" font-weight="bold" fill="white" text-anchor="middle">11</text>
+  
+  <!-- Labels -->
+  <text x="80" y="125" font-family="Arial" font-size="12" fill="white" text-anchor="middle">下限</text>
+  <text x="110" y="125" font-family="Arial" font-size="12" fill="white" text-anchor="middle">上限</text>
+  
+  <text x="100" y="155" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">境界値の守護者</text>
+</svg>

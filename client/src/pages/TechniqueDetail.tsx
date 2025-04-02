@@ -1,18 +1,34 @@
-import { useState } from "react";
-import { Link, useParams } from "wouter";
+import { useState, useEffect } from "react";
+import { Link, useParams, useLocation } from "wouter";
 import { techniques } from "../data/techniques";
 import { categories } from "../data/categories";
-import { ChevronRight, PlusCircle, MinusCircle, ArrowRight, CheckCircle } from "lucide-react";
+import { exercises } from "../data/exercises";
+import { ChevronRight, PlusCircle, MinusCircle, ArrowRight, CheckCircle, Book, Award, BarChart3, Clock } from "lucide-react";
+import { ExerciseView } from "../components/exercise/ExerciseView";
+import { BadgeDisplay } from "../components/exercise/BadgeDisplay";
+import { Button } from "@/components/ui/button";
+import { getUserBadges, getExerciseProgress } from "../services/ProgressService";
 
 const TechniqueDetail = () => {
-  const { id } = useParams();
-  const [activeTab, setActiveTab] = useState("overview");
+  const { id, exerciseId } = useParams();
+  const [, navigate] = useLocation();
+  const [activeTab, setActiveTab] = useState(exerciseId ? "exercise" : "overview");
+  const [selectedExercise, setSelectedExercise] = useState<string | null>(exerciseId || null);
+  const [userBadges, setUserBadges] = useState<any[]>([]);
   
   // Find the technique by id
   const technique = techniques.find(t => t.id === id);
   
   // Find the category for this technique
   const category = technique ? categories.find(c => c.id === technique.category) : null;
+  
+  // Find exercises for this technique
+  const techniqueExercises = exercises.filter(e => e.techniqueId === id);
+
+  // Load user badges
+  useEffect(() => {
+    setUserBadges(getUserBadges());
+  }, []);
   
   if (!technique || !category) {
     return (
@@ -83,10 +99,10 @@ const TechniqueDetail = () => {
       <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
         {/* Tabs */}
         <div className="border-b border-gray-200 dark:border-gray-700">
-          <nav className="flex -mb-px">
+          <nav className="flex -mb-px overflow-x-auto">
             <button 
               onClick={() => setActiveTab("overview")} 
-              className={`py-4 px-6 border-b-2 font-medium text-sm ${activeTab === 'overview' 
+              className={`py-4 px-6 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'overview' 
                 ? 'border-primary-500 text-primary-600 dark:text-primary-400 dark:border-primary-400' 
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-600'}`}
             >
@@ -94,7 +110,7 @@ const TechniqueDetail = () => {
             </button>
             <button 
               onClick={() => setActiveTab("example")} 
-              className={`py-4 px-6 border-b-2 font-medium text-sm ${activeTab === 'example' 
+              className={`py-4 px-6 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'example' 
                 ? 'border-primary-500 text-primary-600 dark:text-primary-400 dark:border-primary-400' 
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-600'}`}
             >
@@ -102,7 +118,7 @@ const TechniqueDetail = () => {
             </button>
             <button 
               onClick={() => setActiveTab("steps")} 
-              className={`py-4 px-6 border-b-2 font-medium text-sm ${activeTab === 'steps' 
+              className={`py-4 px-6 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'steps' 
                 ? 'border-primary-500 text-primary-600 dark:text-primary-400 dark:border-primary-400' 
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-600'}`}
             >
@@ -110,11 +126,33 @@ const TechniqueDetail = () => {
             </button>
             <button 
               onClick={() => setActiveTab("benefits")} 
-              className={`py-4 px-6 border-b-2 font-medium text-sm ${activeTab === 'benefits' 
+              className={`py-4 px-6 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'benefits' 
                 ? 'border-primary-500 text-primary-600 dark:text-primary-400 dark:border-primary-400' 
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-600'}`}
             >
               メリット・デメリット
+            </button>
+            <button 
+              onClick={() => setActiveTab("exercise")} 
+              className={`py-4 px-6 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'exercise' 
+                ? 'border-primary-500 text-primary-600 dark:text-primary-400 dark:border-primary-400' 
+                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-600'}`}
+            >
+              <div className="flex items-center">
+                <Book className="h-4 w-4 mr-1" />
+                演習
+              </div>
+            </button>
+            <button 
+              onClick={() => setActiveTab("badges")} 
+              className={`py-4 px-6 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'badges' 
+                ? 'border-primary-500 text-primary-600 dark:text-primary-400 dark:border-primary-400' 
+                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-600'}`}
+            >
+              <div className="flex items-center">
+                <Award className="h-4 w-4 mr-1" />
+                バッジ
+              </div>
             </button>
           </nav>
         </div>
@@ -310,6 +348,135 @@ const TechniqueDetail = () => {
                   ))}
                 </ul>
               </div>
+            </div>
+          )}
+
+          {/* Exercise Tab */}
+          {activeTab === "exercise" && (
+            <div>
+              {selectedExercise ? (
+                <div>
+                  {/* 選択された演習を表示 */}
+                  {techniqueExercises.filter(e => e.id === selectedExercise).map(exercise => (
+                    <ExerciseView 
+                      key={exercise.id} 
+                      exercise={exercise} 
+                      goBack={() => {
+                        setSelectedExercise(null);
+                        // URL from technique/id/exercise/exerciseId to technique/id 
+                        navigate(`/technique/${id}`);
+                      }} 
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div>
+                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                    <div className="flex items-center">
+                      <Book className="h-5 w-5 mr-2" />
+                      {technique.name}の演習
+                    </div>
+                  </h2>
+                  
+                  <p className="text-gray-700 dark:text-gray-300 mb-6">
+                    以下の演習問題を通じて、{technique.name}のスキルを実践的に身につけましょう。
+                    演習を完了すると、獲得したスキルの証としてバッジが授与されます。
+                  </p>
+
+                  {techniqueExercises.length > 0 ? (
+                    <div className="space-y-6">
+                      {techniqueExercises.map(exercise => {
+                        const progress = getExerciseProgress(exercise.id);
+                        
+                        return (
+                          <div 
+                            key={exercise.id} 
+                            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                          >
+                            <div className="p-6">
+                              <div className="flex justify-between items-start">
+                                <div>
+                                  <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+                                    {exercise.title}
+                                  </h3>
+                                  <p className="mt-2 text-gray-600 dark:text-gray-400">
+                                    {exercise.objective}
+                                  </p>
+                                </div>
+                                {progress?.completed && (
+                                  <div className="bg-green-50 dark:bg-green-900/20 px-3 py-1 rounded-full border border-green-200 dark:border-green-800">
+                                    <span className="text-sm font-medium text-green-700 dark:text-green-400 flex items-center">
+                                      <CheckCircle className="h-4 w-4 mr-1" />
+                                      完了
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
+                              
+                              <div className="mt-4 flex flex-wrap items-center text-sm text-gray-500 dark:text-gray-400 gap-x-6 gap-y-2">
+                                <div className="flex items-center">
+                                  <Clock className="h-4 w-4 mr-1" />
+                                  {exercise.estimatedTime}
+                                </div>
+                                <div className="flex items-center">
+                                  <BarChart3 className="h-4 w-4 mr-1" />
+                                  合格点: {exercise.passingScore}/{exercise.totalPoints}点
+                                </div>
+                              </div>
+                              
+                              <div className="mt-6 flex justify-end">
+                                <Button
+                                  onClick={() => {
+                                    setSelectedExercise(exercise.id);
+                                    // Update URL to include exerciseId
+                                    navigate(`/technique/${id}/exercise/${exercise.id}`);
+                                  }}
+                                >
+                                  {progress?.completed 
+                                    ? "もう一度挑戦する" 
+                                    : progress?.attemptCount 
+                                      ? "続きから挑戦する" 
+                                      : "演習に挑戦する"}
+                                </Button>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div className="text-center py-12 bg-gray-50 dark:bg-gray-900/50 rounded-lg border border-gray-200 dark:border-gray-700">
+                      <Book className="h-12 w-12 mx-auto text-gray-400 mb-4" />
+                      <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">演習がまだ準備されていません</h3>
+                      <p className="text-gray-500 dark:text-gray-400">この技法の演習は現在準備中です。しばらくお待ちください。</p>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Badges Tab */}
+          {activeTab === "badges" && (
+            <div>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                <div className="flex items-center">
+                  <Award className="h-5 w-5 mr-2" />
+                  {technique.name}のバッジ
+                </div>
+              </h2>
+              
+              <p className="text-gray-700 dark:text-gray-300 mb-6">
+                バッジは{technique.name}の理解と習熟を示す証です。
+                演習を完了し、スキルを実証することでバッジを獲得できます。
+              </p>
+              
+              <BadgeDisplay 
+                badges={userBadges.filter(b => b.type === 'technique' && b.relatedId === id)}
+                title={`${technique.name}のバッジ`}
+                description={`${technique.name}の習得を証明するバッジです`}
+                emptyMessage={`まだバッジを獲得していません。演習を完了して${technique.name}のスキルを証明しましょう！`}
+              />
             </div>
           )}
         </div>

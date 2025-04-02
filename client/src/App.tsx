@@ -51,6 +51,7 @@ const AppContent = () => {
             <Switch>
               <Route path="/" component={Home} />
               <Route path="/category/:category" component={CategoryView} />
+              <Route path="/technique/:id/exercise/:exerciseId" component={TechniqueDetail} />
               <Route path="/technique/:id" component={TechniqueDetail} />
               <Route component={NotFound} />
             </Switch>
