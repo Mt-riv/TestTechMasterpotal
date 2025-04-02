@@ -16,11 +16,11 @@ const TechniqueDetail = () => {
   
   if (!technique || !category) {
     return (
-      <div className="max-w-3xl mx-auto text-center">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">テスト技法が見つかりません</h2>
+      <div className="max-w-3xl mx-auto text-center p-12 bg-white dark:bg-gray-800 shadow-xl rounded-lg border border-gray-200 dark:border-gray-700 mt-12">
+        <h2 className="text-2xl font-bold gradient-heading mb-4">テスト技法が見つかりません</h2>
         <p className="mt-4 text-gray-600 dark:text-gray-300">指定されたテスト技法は存在しません。</p>
         <Link href="/">
-          <a className="mt-6 inline-block text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300">
+          <a className="mt-8 inline-block px-5 py-3 bg-gradient-to-r from-primary to-purple-600 text-white font-medium rounded-md hover:opacity-90 transition-opacity">
             ホームに戻る
           </a>
         </Link>
@@ -66,8 +66,13 @@ const TechniqueDetail = () => {
       {/* Header */}
       <div className="mb-6">
         <div className="flex flex-wrap items-center justify-between">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{technique.name}</h1>
-          <span className={`mt-2 sm:mt-0 px-3 py-1 text-sm rounded-full ${getCategoryClassName(technique.category)}`}>
+          <h1 className="text-3xl font-bold gradient-heading">{technique.name}</h1>
+          <span className={`mt-2 sm:mt-0 px-3 py-1 text-sm rounded-full category-badge ${
+            technique.category === 'blackbox' ? 'bg-gradient-to-r from-primary/80 to-blue-500/80 text-white' : 
+            technique.category === 'whitebox' ? 'bg-gradient-to-r from-indigo-500/80 to-blue-600/80 text-white' :
+            technique.category === 'experience' ? 'bg-gradient-to-r from-amber-500/80 to-orange-500/80 text-white' :
+            'bg-gradient-to-r from-purple-500/80 to-pink-500/80 text-white'
+          }`}>
             {category.name}
           </span>
         </div>
@@ -311,9 +316,9 @@ const TechniqueDetail = () => {
       </div>
 
       {/* Footer */}
-      <footer className="mt-12 text-center text-gray-500 dark:text-gray-400 text-sm">
-        <p>© {new Date().getFullYear()} ソフトウェアテスト技法ライブラリ. All rights reserved.</p>
-        <p className="mt-1">参考文献：ISTQB Foundation Level Syllabus, IEEE 829, ISO/IEC/IEEE 29119</p>
+      <footer className="mt-12 text-center p-6 bg-gradient-to-r from-primary/5 to-purple-500/5 rounded-lg">
+        <p className="font-medium text-gray-700 dark:text-gray-300">© {new Date().getFullYear()} ソフトウェアテスト技法ライブラリ by YamaY. All rights reserved.</p>
+        <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">参考文献：ISTQB Foundation Level Syllabus, IEEE 829, ISO/IEC/IEEE 29119</p>
       </footer>
     </div>
   );

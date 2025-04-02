@@ -39,33 +39,33 @@ const CategoryView = () => {
   return (
     <div className="max-w-3xl mx-auto">
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">{currentCategory.name}</h2>
-        <p className="text-gray-600">{currentCategory.description}</p>
+        <h2 className="gradient-heading text-2xl font-bold mb-2">{currentCategory.name}</h2>
+        <p className="text-gray-600 dark:text-gray-300">{currentCategory.description}</p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2">
         {filteredTechniques.map((technique) => (
           <Link key={technique.id} href={`/technique/${technique.id}`}>
-            <a className="technique-item bg-white shadow rounded-lg cursor-pointer hover:shadow-md transition duration-150 border border-gray-200">
-              <div className="p-4">
+            <a className="technique-item card-hover bg-white dark:bg-gray-800 shadow-md rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700 overflow-hidden">
+              <div className="p-5">
                 <div className="flex justify-between items-start">
-                  <h3 className="text-lg font-medium text-gray-900">{technique.name}</h3>
-                  <span className={`px-2 py-1 text-xs rounded-full ${
-                    technique.category === 'blackbox' ? 'bg-primary-100 text-primary-800' : 
-                    technique.category === 'whitebox' ? 'bg-accent-100 text-accent-800' :
-                    technique.category === 'experience' ? 'bg-amber-100 text-amber-800' :
-                    'bg-purple-100 text-purple-800'
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">{technique.name}</h3>
+                  <span className={`category-badge ${
+                    technique.category === 'blackbox' ? 'bg-gradient-to-r from-primary/80 to-blue-500/80 text-white' : 
+                    technique.category === 'whitebox' ? 'bg-gradient-to-r from-indigo-500/80 to-blue-600/80 text-white' :
+                    technique.category === 'experience' ? 'bg-gradient-to-r from-amber-500/80 to-orange-500/80 text-white' :
+                    'bg-gradient-to-r from-purple-500/80 to-pink-500/80 text-white'
                   }`}>
                     {technique.categoryName}
                   </span>
                 </div>
-                <p className="mt-2 text-sm text-gray-500">{technique.shortDescription}</p>
-                <div className="mt-4 flex items-center text-sm">
-                  <span className="text-gray-500 mr-4">
-                    <i className="fas fa-chart-bar mr-1"></i> 効果: {technique.effectiveness}
+                <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">{technique.shortDescription}</p>
+                <div className="mt-4 flex items-center text-sm bg-gray-50 dark:bg-gray-700/50 p-2 rounded-md">
+                  <span className="text-gray-700 dark:text-gray-300 mr-4 font-medium">
+                    効果: <span className="text-primary">{technique.effectiveness}</span>
                   </span>
-                  <span className="text-gray-500">
-                    <i className="fas fa-bolt mr-1"></i> 複雑度: {technique.complexity}
+                  <span className="text-gray-700 dark:text-gray-300 font-medium">
+                    複雑度: <span className="text-primary">{technique.complexity}</span>
                   </span>
                 </div>
               </div>
@@ -74,9 +74,9 @@ const CategoryView = () => {
         ))}
       </div>
 
-      <footer className="mt-12 text-center text-gray-500 text-sm">
-        <p>© {new Date().getFullYear()} ソフトウェアテスト技法ライブラリ. All rights reserved.</p>
-        <p className="mt-1">参考文献：ISTQB Foundation Level Syllabus, IEEE 829, ISO/IEC/IEEE 29119</p>
+      <footer className="mt-12 text-center p-6 bg-gradient-to-r from-primary/5 to-purple-500/5 rounded-lg">
+        <p className="font-medium text-gray-700 dark:text-gray-300">© {new Date().getFullYear()} ソフトウェアテスト技法ライブラリ by YamaY. All rights reserved.</p>
+        <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">参考文献：ISTQB Foundation Level Syllabus, IEEE 829, ISO/IEC/IEEE 29119</p>
       </footer>
     </div>
   );
