@@ -12,7 +12,7 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center">
-            <h1 className="text-xl font-bold gradient-heading truncate max-w-[180px] sm:max-w-md md:max-w-lg">
+            <h1 className="text-xl font-bold gradient-heading break-words max-w-[180px] sm:max-w-md md:max-w-lg">
               ソフトウェアテスト技法ライブラリ by YamaY
             </h1>
           </div>
