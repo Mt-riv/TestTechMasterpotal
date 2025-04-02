@@ -59,7 +59,7 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`fixed inset-y-0 left-0 z-50 w-72 md:w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 pt-16 pb-4 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:h-auto flex-shrink-0 shadow-lg overflow-y-auto ${
+      className={`fixed top-16 bottom-0 left-0 z-40 w-72 md:w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 py-4 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:h-[calc(100vh-4rem)] flex-shrink-0 shadow-lg overflow-y-auto ${
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
