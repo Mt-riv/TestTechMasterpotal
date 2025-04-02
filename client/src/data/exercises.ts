@@ -361,8 +361,8 @@ export const exercises: PracticalExercise[] = [
       }
     ],
     techniqueName: '同値分割法',
-    techniqueId: 'technique-001',
-    categoryId: 'category-001',
+    techniqueId: 'equivalence-partitioning',
+    categoryId: 'blackbox',
     passingScore: 70,
     totalPoints: 100,
     estimatedTime: '25分'
@@ -530,8 +530,8 @@ export const exercises: PracticalExercise[] = [
       }
     ],
     techniqueName: '境界値分析',
-    techniqueId: 'technique-002',
-    categoryId: 'category-001',
+    techniqueId: 'boundary-value-analysis',
+    categoryId: 'blackbox',
     passingScore: 25,
     totalPoints: 40,
     estimatedTime: '25分'
@@ -546,7 +546,7 @@ export const badges: BadgeDefinition[] = [
     description: '同値分割法の演習を高得点で完了しました。効率的なテストケース設計のスキルを証明します。',
     imageUrl: '/badges/equivalence-partitioning.svg',
     type: 'technique',
-    relatedId: 'technique-001',
+    relatedId: 'equivalence-partitioning',
     requirement: {
       type: 'exercise_completion',
       threshold: 0.8, // 80%以上のスコア
@@ -559,7 +559,7 @@ export const badges: BadgeDefinition[] = [
     description: '境界値分析の演習を高得点で完了しました。エッジケースを見つける鋭い目を持っています。',
     imageUrl: '/badges/boundary-value.svg',
     type: 'technique',
-    relatedId: 'technique-002',
+    relatedId: 'boundary-value-analysis',
     requirement: {
       type: 'exercise_completion',
       threshold: 0.8, // 80%以上のスコア
@@ -572,7 +572,7 @@ export const badges: BadgeDefinition[] = [
     description: 'ブラックボックステストカテゴリのすべての演習を完了しました。入力と出力の関係を分析する専門家です。',
     imageUrl: '/badges/black-box.svg',
     type: 'category',
-    relatedId: 'category-001',
+    relatedId: 'blackbox',
     requirement: {
       type: 'category_mastery',
       threshold: 0.7 // 70%以上の平均スコア
