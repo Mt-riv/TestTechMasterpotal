@@ -42,15 +42,17 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 
   // Initialize sidebar state based on screen width
   const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
-    return window.innerWidth >= 1024; // Open by default on large screens
+    // Only auto-open on desktop devices
+    return window.innerWidth >= 1024;
   });
   
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
-
+  
   // Set dark mode class on document when isDarkMode changes
   useEffect(() => {
     localStorage.setItem('darkMode', isDarkMode.toString());
+    // Document class approach - not using this because we're using a wrapper div in App.tsx
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
     } else {
@@ -58,17 +60,22 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     }
   }, [isDarkMode]);
 
-  // Add event listener for screen resize to update sidebar state
+  // Handle device resize - only auto-hide on mobile/tablet
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        setIsSidebarOpen(true);
-      } else {
+      // On mobile/tablet, hide sidebar when resizing
+      if (window.innerWidth < 1024) {
         setIsSidebarOpen(false);
       }
     };
 
+    // Add event listener
     window.addEventListener('resize', handleResize);
+    
+    // Initial call
+    handleResize();
+    
+    // Cleanup
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 

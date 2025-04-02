@@ -47,7 +47,7 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`fixed inset-y-0 left-0 z-10 w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 pt-16 pb-4 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:h-auto overflow-y-auto flex-shrink-0 shadow-lg ${
+      className={`fixed inset-y-0 left-0 z-50 w-72 md:w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 pt-16 pb-4 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:h-auto flex-shrink-0 shadow-lg overflow-y-auto ${
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
@@ -55,19 +55,21 @@ const Sidebar = () => {
         <h3 className="text-sm font-bold text-primary uppercase tracking-wider px-3 mb-2">カテゴリー</h3>
         <div className="mt-2 space-y-1">
           {categories.map((category) => (
-            <Link key={category.id} href={category.id === 'all' ? '/' : `/category/${category.id}`}>
-              <a
-                onClick={() => handleCategoryClick(category.id)}
-                className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all ${
-                  categoryFilter === category.id
-                    ? "bg-gradient-to-r from-primary/15 to-purple-500/15 text-primary-600 dark:text-primary-400 font-bold"
-                    : "text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400"
-                }`}
-              >
-                {getCategoryIcon(category.id)}
-                <span>{category.name}</span>
-              </a>
-            </Link>
+            <div key={category.id}>
+              <Link href={category.id === 'all' ? '/' : `/category/${category.id}`}>
+                <div
+                  onClick={() => handleCategoryClick(category.id)}
+                  className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all cursor-pointer ${
+                    categoryFilter === category.id
+                      ? "bg-gradient-to-r from-primary/15 to-purple-500/15 text-primary-600 dark:text-primary-400 font-bold"
+                      : "text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400"
+                  }`}
+                >
+                  {getCategoryIcon(category.id)}
+                  <span>{category.name}</span>
+                </div>
+              </Link>
+            </div>
           ))}
         </div>
       </div>
@@ -76,12 +78,14 @@ const Sidebar = () => {
         <h3 className="text-sm font-bold text-primary uppercase tracking-wider px-3 mb-2">人気の技法</h3>
         <div className="mt-2 space-y-1">
           {popularTechniques.map(technique => (
-            <Link key={technique.id} href={`/technique/${technique.id}`}>
-              <a className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400 transition-all">
-                {getTechniqueIcon(technique.id)}
-                <span>{technique.name}</span>
-              </a>
-            </Link>
+            <div key={technique.id}>
+              <Link href={`/technique/${technique.id}`}>
+                <div className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400 transition-all cursor-pointer">
+                  {getTechniqueIcon(technique.id)}
+                  <span>{technique.name}</span>
+                </div>
+              </Link>
+            </div>
           ))}
         </div>
       </div>
@@ -89,18 +93,18 @@ const Sidebar = () => {
       <div className="px-4 mt-8">
         <h3 className="text-sm font-bold text-primary uppercase tracking-wider px-3 mb-2">リソース</h3>
         <div className="mt-2 space-y-1">
-          <a href="#" className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400 transition-all">
+          <div className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400 transition-all cursor-pointer">
             <Book className="mr-3 h-5 w-5 text-primary/70" />
             <span>テスト技法ガイド</span>
-          </a>
-          <a href="#" className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400 transition-all">
+          </div>
+          <div className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400 transition-all cursor-pointer">
             <GraduationCap className="mr-3 h-5 w-5 text-primary/70" />
             <span>学習パス</span>
-          </a>
-          <a href="#" className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400 transition-all">
+          </div>
+          <div className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400 transition-all cursor-pointer">
             <ExternalLink className="mr-3 h-5 w-5 text-primary/70" />
             <span>外部リンク集</span>
-          </a>
+          </div>
         </div>
       </div>
       
