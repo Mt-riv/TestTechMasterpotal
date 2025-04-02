@@ -93,9 +93,9 @@ const Home = () => {
         {/* BlackBox Testing Card */}
         <div 
           onClick={() => handleCategoryClick('blackbox')} 
-          className="category-card card-hover bg-white dark:bg-gray-800 overflow-hidden shadow-md rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700"
+          className="category-card card-hover bg-white dark:bg-gray-800 overflow-hidden shadow-md rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700 flex flex-col h-full"
         >
-          <div className="p-5">
+          <div className="p-5 flex-grow">
             <div className="flex items-center">
               <div className="icon-gradient">
                 <Box className="h-6 w-6" />
@@ -122,7 +122,7 @@ const Home = () => {
               </ul>
             </div>
           </div>
-          <div className="bg-gradient-to-r from-primary/10 to-purple-500/10 px-5 py-3">
+          <div className="bg-gradient-to-r from-primary/10 to-purple-500/10 px-5 py-3 mt-auto">
             <span className="text-sm font-medium text-primary flex items-center">
               詳細を見る
               <ChevronRight className="h-4 w-4 ml-1" />
@@ -133,9 +133,9 @@ const Home = () => {
         {/* WhiteBox Testing Card */}
         <div 
           onClick={() => handleCategoryClick('whitebox')} 
-          className="category-card card-hover bg-white dark:bg-gray-800 overflow-hidden shadow-md rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700"
+          className="category-card card-hover bg-white dark:bg-gray-800 overflow-hidden shadow-md rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700 flex flex-col h-full"
         >
-          <div className="p-5">
+          <div className="p-5 flex-grow">
             <div className="flex items-center">
               <div className="icon-gradient from-blue-500 to-indigo-600">
                 <Code className="h-6 w-6" />
@@ -162,7 +162,7 @@ const Home = () => {
               </ul>
             </div>
           </div>
-          <div className="bg-gradient-to-r from-primary/10 to-purple-500/10 px-5 py-3">
+          <div className="bg-gradient-to-r from-primary/10 to-purple-500/10 px-5 py-3 mt-auto">
             <span className="text-sm font-medium text-primary flex items-center">
               詳細を見る
               <ChevronRight className="h-4 w-4 ml-1" />
@@ -173,9 +173,9 @@ const Home = () => {
         {/* Experience Based Testing Card */}
         <div 
           onClick={() => handleCategoryClick('experience')}
-          className="category-card card-hover bg-white dark:bg-gray-800 overflow-hidden shadow-md rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700"
+          className="category-card card-hover bg-white dark:bg-gray-800 overflow-hidden shadow-md rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700 flex flex-col h-full"
         >
-          <div className="p-5">
+          <div className="p-5 flex-grow">
             <div className="flex items-center">
               <div className="icon-gradient bg-gradient-to-br from-amber-500 to-orange-500">
                 <Lightbulb className="h-6 w-6" />
@@ -202,7 +202,7 @@ const Home = () => {
               </ul>
             </div>
           </div>
-          <div className="bg-gradient-to-r from-primary/10 to-purple-500/10 px-5 py-3">
+          <div className="bg-gradient-to-r from-primary/10 to-purple-500/10 px-5 py-3 mt-auto">
             <span className="text-sm font-medium text-primary flex items-center">
               詳細を見る
               <ChevronRight className="h-4 w-4 ml-1" />
@@ -213,9 +213,9 @@ const Home = () => {
         {/* Specialized Testing Card */}
         <div 
           onClick={() => handleCategoryClick('specialized')}
-          className="category-card card-hover bg-white dark:bg-gray-800 overflow-hidden shadow-md rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700"
+          className="category-card card-hover bg-white dark:bg-gray-800 overflow-hidden shadow-md rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700 flex flex-col h-full"
         >
-          <div className="p-5">
+          <div className="p-5 flex-grow">
             <div className="flex items-center">
               <div className="icon-gradient bg-gradient-to-br from-purple-500 to-pink-500">
                 <Puzzle className="h-6 w-6" />
@@ -242,7 +242,7 @@ const Home = () => {
               </ul>
             </div>
           </div>
-          <div className="bg-gradient-to-r from-primary/10 to-purple-500/10 px-5 py-3">
+          <div className="bg-gradient-to-r from-primary/10 to-purple-500/10 px-5 py-3 mt-auto">
             <span className="text-sm font-medium text-primary flex items-center">
               詳細を見る
               <ChevronRight className="h-4 w-4 ml-1" />
