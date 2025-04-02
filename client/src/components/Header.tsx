@@ -10,13 +10,13 @@ const Header = () => {
   return (
     <header className="bg-white shadow-md border-b border-gray-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16 items-center">
-          <div className="flex items-center">
-            <h1 className="text-xl sm:text-lg md:text-xl font-bold gradient-heading max-w-[180px] sm:max-w-md md:max-w-lg whitespace-normal" style={{ fontSize: 'clamp(10pt, 4vw, 20pt)' }}>
+        <div className="flex h-16 items-center">
+          <div className="flex-1 flex items-center">
+            <h1 className="text-xl sm:text-lg md:text-xl font-bold gradient-heading break-words mr-4" style={{ fontSize: 'clamp(10pt, 4vw, 20pt)', maxWidth: 'calc(100% - 10px)' }}>
               ソフトウェアテスト技法ライブラリ
             </h1>
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 flex-shrink-0">
             <div className="hidden sm:block">
               <SearchBar />
             </div>
@@ -26,7 +26,7 @@ const Header = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="rounded-full"
+                    className="rounded-full flex-shrink-0"
                     onClick={openTutorial}
                     aria-label="チュートリアルを開始"
                   >
