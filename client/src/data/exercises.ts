@@ -2265,6 +2265,391 @@ export const exercises: PracticalExercise[] = [
     passingScore: 70,
     totalPoints: 100,
     estimatedTime: '30分'
+  },
+  {
+    id: 'ex-007',
+    title: '条件網羅テストの演習',
+    description: '条件網羅（Condition Coverage）テスト技法を使った実践演習です。',
+    objective: 'この演習では、複合条件内の各条件について、すべての真偽値の組み合わせをテストする方法を学びます。',
+    scenarioDescription: 
+      'あなたはセキュリティシステムの開発チームのテストエンジニアとして、以下のアクセス制御関数をテストする任務を与えられました：\n\n' +
+      '```javascript\n' +
+      'function checkAccess(user, resourceType, isAdmin, hasMfaEnabled) {\n' +
+      '  // 管理者は多要素認証が有効であればすべてのリソースにアクセス可能\n' +
+      '  if (isAdmin && hasMfaEnabled) {\n' +
+      '    return "アクセス許可";\n' +
+      '  }\n' +
+      '  \n' +
+      '  // 一般リソースへのアクセス\n' +
+      '  if (resourceType === "public" || (user.role === "user" && user.isVerified)) {\n' +
+      '    return "アクセス許可";\n' +
+      '  }\n' +
+      '  \n' +
+      '  // 機密リソースへのアクセス\n' +
+      '  if (resourceType === "confidential" && user.clearanceLevel >= 3 && hasMfaEnabled) {\n' +
+      '    return "アクセス許可";\n' +
+      '  }\n' +
+      '  \n' +
+      '  return "アクセス拒否";\n' +
+      '}\n' +
+      '```\n\n' +
+      'この関数に対して条件網羅（複合条件内の各条件がtrueおよびfalseとなるすべての組み合わせをテスト）を達成するテストケースを設計してください。',
+    steps: [
+      {
+        stepNumber: 1,
+        description: '複合条件を特定し、各条件の真偽値の組み合わせを列挙する'
+      },
+      {
+        stepNumber: 2,
+        description: '各組み合わせをテストするためのテストケースを設計する'
+      },
+      {
+        stepNumber: 3,
+        description: 'テストケースが条件網羅を達成できているか確認する'
+      },
+      {
+        stepNumber: 4,
+        description: '必要に応じてテストケースを追加または最適化する'
+      }
+    ],
+    quiz: [
+      {
+        id: 'q-007-1',
+        questionText: '条件網羅（Condition Coverage）テストとは何ですか？',
+        options: [
+          {
+            id: 'q-007-1-a',
+            text: 'プログラム内のすべての命令が少なくとも1回実行されるようにテストすること',
+            isCorrect: false,
+            explanation: 'これは命令網羅（Statement Coverage）の説明です。'
+          },
+          {
+            id: 'q-007-1-b',
+            text: 'プログラム内のすべての分岐（条件の真偽）が少なくとも1回実行されるようにテストすること',
+            isCorrect: false,
+            explanation: 'これは分岐網羅（Branch Coverage）の説明です。'
+          },
+          {
+            id: 'q-007-1-c',
+            text: '複合条件内の各条件が個別にtrueとfalseの両方の値を取るようにテストすること',
+            isCorrect: true,
+            explanation: '条件網羅は、複合条件（例：A && B || C）内の各条件（A、B、C）が個別にtrueとfalseの両方の値を取るようにテストします。'
+          },
+          {
+            id: 'q-007-1-d',
+            text: 'プログラム内のすべての実行パスが少なくとも1回実行されるようにテストすること',
+            isCorrect: false,
+            explanation: 'これはパス網羅（Path Coverage）の説明です。'
+          }
+        ],
+        explanation: '条件網羅（Condition Coverage）は、複合条件内の各条件が個別にtrueとfalseの両方の値を取るようにテストするホワイトボックステスト技法です。例えば、if (A && B)という条件があるとき、条件網羅はAとBの両方がtrueとfalseの値を取るテストケースを求めます。ただし、この網羅基準では、条件の組み合わせのすべてをテストするわけではありません。例えば、(A=true, B=false)と(A=false, B=true)の組み合わせは必須ではありません。より厳密な基準として「複合条件網羅（Multiple Condition Coverage）」があり、これはすべての組み合わせをテストします。',
+        difficulty: 'easy',
+        points: 5
+      },
+      {
+        id: 'q-007-2',
+        questionText: '次の複合条件 if (A && B || C) に対する条件網羅を達成するために必要な最小のテストケース数はいくつですか？',
+        options: [
+          {
+            id: 'q-007-2-a',
+            text: '2つ',
+            isCorrect: false,
+            explanation: '2つのテストケースでは、A、B、Cのすべてについてtrueとfalseの両方の値をテストすることはできません。'
+          },
+          {
+            id: 'q-007-2-b',
+            text: '3つ',
+            isCorrect: true,
+            explanation: '適切に設計された3つのテストケースで、A、B、Cのそれぞれについてtrueとfalseの両方の値をテストすることができます。'
+          },
+          {
+            id: 'q-007-2-c',
+            text: '4つ',
+            isCorrect: false,
+            explanation: '4つのテストケースは必要以上です。最小数は3つです。'
+          },
+          {
+            id: 'q-007-2-d',
+            text: '8つ',
+            isCorrect: false,
+            explanation: '8つは複合条件網羅（すべての組み合わせ）に必要なテストケース数ですが、条件網羅には必要ありません。'
+          }
+        ],
+        explanation: '条件網羅では、各条件が個別にtrueとfalseの両方の値を取るテストケースが必要です。if (A && B || C)の場合、以下の3つのテストケースで条件網羅を達成できます：\n\n1. A=true, B=true, C=false → 条件全体はtrue（AとBがtrueのため）\n2. A=false, B=true, C=true → 条件全体はtrue（Cがtrueのため）\n3. A=false, B=false, C=false → 条件全体はfalse\n\nこれらのテストケースで、A、B、Cのそれぞれについてtrueとfalseの両方の値がテストされます。条件網羅は各条件の個別の真偽のみを求めるため、8つのすべての組み合わせをテストする必要はありません。',
+        difficulty: 'medium',
+        points: 10
+      },
+      {
+        id: 'q-007-3',
+        questionText: '条件網羅と複合条件網羅（Multiple Condition Coverage）の違いを最もよく説明しているのはどれですか？',
+        options: [
+          {
+            id: 'q-007-3-a',
+            text: '条件網羅は各条件の真偽をテストし、複合条件網羅はすべての条件の組み合わせをテストする',
+            isCorrect: true,
+            explanation: 'これが正確な違いです。複合条件網羅はより厳格で、すべての可能な組み合わせをテストします。'
+          },
+          {
+            id: 'q-007-3-b',
+            text: '条件網羅はホワイトボックステスト技法で、複合条件網羅はブラックボックステスト技法である',
+            isCorrect: false,
+            explanation: '両方ともホワイトボックステスト技法です。'
+          },
+          {
+            id: 'q-007-3-c',
+            text: '条件網羅はANDとOR演算子を扱い、複合条件網羅はより複雑な演算子を扱う',
+            isCorrect: false,
+            explanation: '両方とも同じ種類の論理演算子を扱います。違いはテストの網羅範囲です。'
+          },
+          {
+            id: 'q-007-3-d',
+            text: '条件網羅は関数レベルで適用され、複合条件網羅はプログラム全体に適用される',
+            isCorrect: false,
+            explanation: '両方とも任意のレベル（関数、モジュール、プログラム全体）に適用できます。'
+          }
+        ],
+        explanation: '条件網羅と複合条件網羅の主な違いは以下の通りです：\n\n- 条件網羅（Condition Coverage）：複合条件内の各条件が個別にtrueとfalseの両方の値を取るようにテストします。例えば、if (A && B)という条件の場合、条件網羅はAとBのそれぞれがtrueとfalseの値を取るテストケースを求めます。必要なテストケース数は少なくなりますが、すべての条件の組み合わせをテストするわけではありません。\n\n- 複合条件網羅（Multiple Condition Coverage）：複合条件内のすべての条件の組み合わせをテストします。例えば、if (A && B)の場合、以下の組み合わせすべてをテストします：\n  * A=true, B=true\n  * A=true, B=false\n  * A=false, B=true\n  * A=false, B=false\n\n複合条件網羅はより徹底的ですが、条件の数が増えると必要なテストケース数が2^n（nは条件数）で増加するため、実用的でない場合があります。',
+        difficulty: 'medium',
+        points: 10
+      },
+      {
+        id: 'q-007-4',
+        questionText: '上記のcheckAccess関数内の最初の複合条件 "isAdmin && hasMfaEnabled" に対する条件網羅を達成するために必要なテストケースはどれですか？',
+        options: [
+          {
+            id: 'q-007-4-a',
+            text: 'isAdmin=true, hasMfaEnabled=true のみ',
+            isCorrect: false,
+            explanation: 'このテストケースはisAdminとhasMfaEnabledの両方がtrueの場合のみをカバーします。条件網羅には各条件のfalseの場合も必要です。'
+          },
+          {
+            id: 'q-007-4-b',
+            text: 'isAdmin=true, hasMfaEnabled=true と isAdmin=false, hasMfaEnabled=false',
+            isCorrect: false,
+            explanation: 'この2つのテストケースでは、isAdmin=true, hasMfaEnabled=falseとisAdmin=false, hasMfaEnabled=trueの組み合わせがカバーされていません。これらは条件網羅に必要です。'
+          },
+          {
+            id: 'q-007-4-c',
+            text: 'isAdmin=true, hasMfaEnabled=true と isAdmin=false, hasMfaEnabled=true と isAdmin=true, hasMfaEnabled=false',
+            isCorrect: true,
+            explanation: 'これらの3つのテストケースで、isAdminとhasMfaEnabledのそれぞれについてtrueとfalseの両方の値がテストされます。これが条件網羅に必要な最小のセットです。'
+          },
+          {
+            id: 'q-007-4-d',
+            text: 'isAdmin=true, hasMfaEnabled=true と isAdmin=false, hasMfaEnabled=false と isAdmin=false, hasMfaEnabled=true と isAdmin=true, hasMfaEnabled=false',
+            isCorrect: false,
+            explanation: 'これらの4つのテストケースはすべての組み合わせをカバーしており、複合条件網羅を達成します。しかし、条件網羅に必要なのは3つのテストケースのみです。'
+          }
+        ],
+        explanation: 'isAdmin && hasMfaEnabledという複合条件の条件網羅を達成するには、以下の条件を満たすテストケースが必要です：\n\n1. isAdminがtrueの場合とfalseの場合をテスト\n2. hasMfaEnabledがtrueの場合とfalseの場合をテスト\n\nこれを達成するために必要な最小のテストケースセットは以下の通りです：\n\n1. isAdmin=true, hasMfaEnabled=true\n2. isAdmin=false, hasMfaEnabled=true（isAdminがfalseの場合をテスト）\n3. isAdmin=true, hasMfaEnabled=false（hasMfaEnabledがfalseの場合をテスト）\n\n4番目の組み合わせ（isAdmin=false, hasMfaEnabled=false）は複合条件網羅には必要ですが、単純な条件網羅には必要ありません。なぜなら、上記の3つのテストケースですでにisAdminとhasMfaEnabledの両方についてtrueとfalseの値がテストされているからです。',
+        difficulty: 'medium',
+        points: 10
+      },
+      {
+        id: 'q-007-5',
+        questionText: '条件網羅テストの主な限界はどれですか？',
+        options: [
+          {
+            id: 'q-007-5-a',
+            text: '複合条件内の条件の組み合わせによる相互作用を完全にテストできない',
+            isCorrect: true,
+            explanation: 'これは条件網羅の主な限界です。条件の組み合わせによるバグを見逃す可能性があります。'
+          },
+          {
+            id: 'q-007-5-b',
+            text: '大規模なプログラムでは実施が困難である',
+            isCorrect: false,
+            explanation: '大規模プログラムでも条件網羅テストは実施可能です。複合条件網羅の方が実施が困難です。'
+          },
+          {
+            id: 'q-007-5-c',
+            text: 'テスト実行中の性能問題を検出できない',
+            isCorrect: false,
+            explanation: 'これはどのカバレッジ基準にも当てはまります。性能テストは別のテスト種類です。'
+          },
+          {
+            id: 'q-007-5-d',
+            text: 'オブジェクト指向プログラミングには適用できない',
+            isCorrect: false,
+            explanation: '条件網羅テストはオブジェクト指向プログラミングを含むすべてのプログラミングパラダイムに適用できます。'
+          }
+        ],
+        explanation: '条件網羅テストの主な限界は、複合条件内の条件の組み合わせによる相互作用を完全にテストできないことです。各条件のtrueとfalseの値が個別にテストされても、特定の組み合わせによるバグが見逃される可能性があります。\n\n例えば、if (A && B)という条件において、A=true、B=trueの場合にのみ発生するバグは、必ずしも条件網羅テストでは検出されません。A=true、B=falseとA=false、B=trueの組み合わせのみをテストした場合、A=true、B=trueの組み合わせはテストされない可能性があります。\n\nこの限界を克服するには、複合条件網羅（Multiple Condition Coverage）を使用して、すべての条件の組み合わせをテストする必要があります。ただし、条件の数が増えると組み合わせの数が指数関数的に増加するため、完全な複合条件網羅は常に実用的とは限りません。そのため、リスク分析に基づいて重要な組み合わせを選択するなどの戦略が必要になることがあります。',
+        difficulty: 'hard',
+        points: 15
+      },
+      {
+        id: 'q-007-6',
+        questionText: '次のコードの2番目の複合条件（resourceType === "public" || (user.role === "user" && user.isVerified)）の条件網羅を達成するために必要なテストケースの最小数はいくつですか？',
+        options: [
+          {
+            id: 'q-007-6-a',
+            text: '2つ',
+            isCorrect: false,
+            explanation: '2つのテストケースでは、3つの条件（resourceType === "public"、user.role === "user"、user.isVerified）のそれぞれについてtrueとfalseの両方の値をテストすることはできません。'
+          },
+          {
+            id: 'q-007-6-b',
+            text: '3つ',
+            isCorrect: false,
+            explanation: '3つのテストケースでも、3つの条件のそれぞれについてtrueとfalseの両方の値をテストすることはできません。'
+          },
+          {
+            id: 'q-007-6-c',
+            text: '4つ',
+            isCorrect: true,
+            explanation: '適切に設計された4つのテストケースで、3つの条件のそれぞれについてtrueとfalseの両方の値をテストすることができます。'
+          },
+          {
+            id: 'q-007-6-d',
+            text: '8つ',
+            isCorrect: false,
+            explanation: '8つは複合条件網羅（すべての組み合わせ）に必要なテストケース数です。条件網羅には必要ありません。'
+          }
+        ],
+        explanation: 'resourceType === "public" || (user.role === "user" && user.isVerified)という複合条件の条件網羅を達成するには、以下の条件を満たすテストケースが必要です：\n\n1. resourceType === "public"がtrueの場合とfalseの場合をテスト\n2. user.role === "user"がtrueの場合とfalseの場合をテスト\n3. user.isVerifiedがtrueの場合とfalseの場合をテスト\n\nこれを達成するために必要な最小のテストケースセットは以下の通りです：\n\n1. resourceType="public", user.role="admin", user.isVerified=false\n   - resourceType === "public"がtrue\n   - user.role === "user"がfalse\n   - user.isVerifiedがfalse\n\n2. resourceType="private", user.role="user", user.isVerified=true\n   - resourceType === "public"がfalse\n   - user.role === "user"がtrue\n   - user.isVerifiedがtrue\n\n3. resourceType="private", user.role="admin", user.isVerified=true\n   - resourceType === "public"がfalse\n   - user.role === "user"がfalse\n   - user.isVerifiedがtrue\n\n4. resourceType="private", user.role="user", user.isVerified=false\n   - resourceType === "public"がfalse\n   - user.role === "user"がtrue\n   - user.isVerifiedがfalse\n\nこれらの4つのテストケースで、3つの条件のそれぞれについてtrueとfalseの両方の値がテストされます。',
+        difficulty: 'hard',
+        points: 15
+      },
+      {
+        id: 'q-007-7',
+        questionText: '次のコードに対する条件網羅テストで見落としやすいバグはどれですか？\n\n```javascript\nfunction processOrder(order, user) {\n  if (order.total > 0 && (user.isPremium || user.credits >= order.total)) {\n    // 注文処理\n    return "注文処理完了";\n  } else {\n    return "注文処理失敗";\n  }\n}\n```',
+        options: [
+          {
+            id: 'q-007-7-a',
+            text: 'order.totalが0の場合に注文が拒否されるバグ',
+            isCorrect: false,
+            explanation: 'これは条件網羅テストで検出されます。order.total > 0がfalseの場合のテストケースが含まれるためです。'
+          },
+          {
+            id: 'q-007-7-b',
+            text: 'user.isPremiumがtrueでuser.creditsが不足している場合に発生するバグ',
+            isCorrect: false,
+            explanation: 'これは正常な動作です。条件の論理によれば、ユーザーがプレミアムの場合、クレジットに関係なく注文は処理されるべきです。'
+          },
+          {
+            id: 'q-007-7-c',
+            text: 'order.totalが負の値で、user.isPremiumがtrueの場合に発生するバグ',
+            isCorrect: true,
+            explanation: 'これは条件網羅テストで見落とされやすいバグです。各条件の真偽をテストしても、この特定の組み合わせ（order.total < 0, user.isPremium = true）はテストされない可能性があります。'
+          },
+          {
+            id: 'q-007-7-d',
+            text: 'user.creditsがundefinedの場合に発生するバグ',
+            isCorrect: false,
+            explanation: 'これは条件網羅テストの範囲外の問題です。有効な入力値のテストと関連しています。'
+          }
+        ],
+        explanation: '条件網羅テストでは、条件の特定の組み合わせによって発生するバグが見落とされる可能性があります。この例では、order.total > 0 && (user.isPremium || user.credits >= order.total)という複合条件があります。\n\n条件網羅テストでは、order.totalが負の値（order.total > 0がfalse）かつuser.isPremiumがtrueの場合が明示的にテストされない可能性があります。この組み合わせでは、注文合計が無効（負の値）であるにもかかわらず、ユーザーがプレミアムであるため注文が処理されてしまうバグが発生する可能性があります。\n\n適切なコードは、注文合計が有効であることを最初に確認し、その後でユーザーの支払い能力をチェックするべきでしょう。例えば：\n\n```javascript\nif (order.total <= 0) {\n  return "無効な注文金額";\n} else if (user.isPremium || user.credits >= order.total) {\n  // 注文処理\n  return "注文処理完了";\n} else {\n  return "支払い方法が不足しています";\n}\n```\n\nこのようなバグを検出するには、複合条件網羅テストや境界値分析などの追加のテスト技法が必要です。',
+        difficulty: 'hard',
+        points: 15
+      },
+      {
+        id: 'q-007-8',
+        questionText: '次のコードに対する条件網羅テストを実施する際、テストケースの設計でよく犯すミスはどれですか？\n\n```javascript\nfunction validatePassword(password) {\n  if (password && password.length >= 8 && /[A-Z]/.test(password) && /[0-9]/.test(password)) {\n    return "有効なパスワード";\n  } else {\n    return "無効なパスワード";\n  }\n}\n```',
+        options: [
+          {
+            id: 'q-007-8-a',
+            text: '複合条件全体が常にtrueまたはfalseになるテストケースのみを使用すること',
+            isCorrect: true,
+            explanation: 'これは条件網羅テストでよく犯すミスです。各条件が個別にtrueとfalseの値を取るテストケースが必要です。'
+          },
+          {
+            id: 'q-007-8-b',
+            text: 'passwordがnullの場合をテストしないこと',
+            isCorrect: false,
+            explanation: 'passwordがnullの場合は、最初の条件（password）がfalseとなるテストケースです。条件網羅テストでは、この条件もテストする必要があります。'
+          },
+          {
+            id: 'q-007-8-c',
+            text: '短すぎるパスワードをテストしないこと',
+            isCorrect: false,
+            explanation: '短すぎるパスワードは、2番目の条件（password.length >= 8）がfalseとなるテストケースです。条件網羅テストでは、この条件もテストする必要があります。'
+          },
+          {
+            id: 'q-007-8-d',
+            text: '関数の戻り値を検証しないこと',
+            isCorrect: false,
+            explanation: 'これはテストの検証ステップの問題であり、条件網羅テストの設計とは直接関係ありません。'
+          }
+        ],
+        explanation: '条件網羅テストを実施する際のよくある誤りは、複合条件全体が常にtrueまたはfalseになるテストケースのみを使用することです。validatePassword関数の場合、以下の4つの条件があります：\n\n1. password（パスワードが存在するか）\n2. password.length >= 8（パスワードが十分な長さか）\n3. /[A-Z]/.test(password)（パスワードに大文字が含まれるか）\n4. /[0-9]/.test(password)（パスワードに数字が含まれるか）\n\n条件網羅テストでは、これらの各条件が個別にtrueとfalseの値を取るテストケースが必要です。例えば：\n\n- 条件1のfalseをテスト：password = null または undefined\n- 条件2のfalseをテスト：password = "Abc1"（8文字未満）\n- 条件3のfalseをテスト：password = "abcdefg123"（大文字なし）\n- 条件4のfalseをテスト：password = "Abcdefghijk"（数字なし）\n- すべての条件がtrueの場合：password = "Abcdefg123"\n\nこれらのテストケースを使用することで、各条件が個別にテストされます。テスト設計で注意すべき点は、一部の条件がfalseの場合、短絡評価により後続の条件が評価されない可能性があることです。例えば、passwordがnullの場合、他の条件は評価されません。',
+        difficulty: 'medium',
+        points: 10
+      },
+      {
+        id: 'q-007-9',
+        questionText: '条件網羅テストと分岐網羅テストの関係について正しい説明はどれですか？',
+        options: [
+          {
+            id: 'q-007-9-a',
+            text: '条件網羅が100%の場合、分岐網羅も必ず100%になる',
+            isCorrect: false,
+            explanation: 'これは正しくありません。条件網羅が100%でも、分岐網羅が100%にならない場合があります。'
+          },
+          {
+            id: 'q-007-9-b',
+            text: '分岐網羅が100%の場合、条件網羅も必ず100%になる',
+            isCorrect: false,
+            explanation: 'これも正しくありません。分岐網羅が100%でも、条件網羅が100%にならない場合があります。'
+          },
+          {
+            id: 'q-007-9-c',
+            text: '条件網羅と分岐網羅は互いに独立しており、一方が高くても他方が低い場合がある',
+            isCorrect: true,
+            explanation: 'これが正しい説明です。条件網羅と分岐網羅は異なる基準であり、一方が高くても他方が低い場合があります。'
+          },
+          {
+            id: 'q-007-9-d',
+            text: '条件網羅と分岐網羅は同じテスト技法の異なる名称である',
+            isCorrect: false,
+            explanation: 'これは誤りです。条件網羅と分岐網羅は異なるテスト技法です。'
+          }
+        ],
+        explanation: '条件網羅と分岐網羅は互いに独立した異なるテスト基準であり、一方が高くても他方が低い場合があります。\n\n例えば、次のコードを考えてみましょう：\n```javascript\nif (A && B) {\n  // コードブロック\n}\n```\n\n- 分岐網羅は、if文の結果（真と偽）の両方がテストされることを要求します。これは2つのテストケースで達成できます：\n  * A=true, B=true（条件全体がtrue）\n  * A=false, B=any（条件全体がfalse）\n\n- 条件網羅は、AとBの両方が個別にtrueとfalseの値を取ることを要求します。これは以下のテストケースで達成できます：\n  * A=true, B=true（AとBがともにtrue）\n  * A=false, B=true（Aがfalse、Bがtrue）\n  * A=true, B=false（Aがtrue、Bがfalse）\n\nこの例では、分岐網羅を100%達成しても（2つのテストケース）、条件網羅を完全に達成できない場合があります（3つのテストケースが必要）。逆に、条件網羅を達成するテストケースで分岐網羅も達成できますが、これは常に当てはまるわけではありません。\n\n特に短絡評価を行うプログラミング言語（JavaScriptなど）では、条件の評価が途中で終了するため、条件網羅と分岐網羅の関係はより複雑になります。したがって、両方のテスト基準を組み合わせることで、より効果的なテストが可能になります。',
+        difficulty: 'medium',
+        points: 10
+      },
+      {
+        id: 'q-007-10',
+        questionText: '条件網羅テストを自動化する際の最も効果的なアプローチはどれですか？',
+        options: [
+          {
+            id: 'q-007-10-a',
+            text: 'ランダムテスト（ファジング）を使用して、できるだけ多くの条件の組み合わせをカバーする',
+            isCorrect: false,
+            explanation: 'ランダムテストは条件のカバレッジを保証しません。特定の組み合わせが偶然テストされない可能性があります。'
+          },
+          {
+            id: 'q-007-10-b',
+            text: '各条件を分析し、必要なテストケースを手動で設計した後、それらを自動テストとして実装する',
+            isCorrect: true,
+            explanation: '各条件を分析して必要なテストケースを特定し、それらを自動テストとして実装することが最も効果的です。'
+          },
+          {
+            id: 'q-007-10-c',
+            text: 'すべての可能な入力の組み合わせを生成して実行する',
+            isCorrect: false,
+            explanation: 'すべての入力の組み合わせをテストすることは、多くの場合、実用的ではありません。条件の数が増えると、組み合わせは指数関数的に増加します。'
+          },
+          {
+            id: 'q-007-10-d',
+            text: 'テスト対象の関数をリファクタリングして、複合条件を単純な条件に分解する',
+            isCorrect: false,
+            explanation: 'テスト対象のコードをリファクタリングすることは、テスト自体の自動化アプローチではありません。また、コードの振る舞いを変える可能性があります。'
+          }
+        ],
+        explanation: '条件網羅テストを自動化する最も効果的なアプローチは、各条件を分析して必要なテストケースを特定し、それらを自動テストとして実装することです。このアプローチでは以下のステップを踏みます：\n\n1. コード内の複合条件を特定する\n2. 各条件がtrueとfalseになるために必要なテストケースを分析する\n3. 各条件がtrueとfalseの両方の値を取るように最小のテストケースセットを設計する\n4. これらのテストケースを自動テストフレームワーク（Jest、JUnit、pytestなど）で実装する\n5. カバレッジツールを使用して、条件網羅が達成されているかを検証する\n\nこのアプローチの利点は、テストの目的が明確であり、各テストケースが特定の条件をカバーするように設計されていることです。また、テストケースの数を最小限に抑えながら、必要なカバレッジを達成できます。\n\n多くの場合、モックやスタブを使用して、特定の条件を制御しやすくすることも有効です。例えば、外部サービスやデータベースに依存する条件をテストする場合、これらの依存関係をモック化することで、条件の真偽を制御しやすくなります。\n\n注意点として、プログラミング言語の短絡評価（例：JavaScriptのA && B では A が false の場合 B は評価されない）を考慮する必要があります。これにより、一部の条件がテストされない可能性があるため、テストケースの設計時に注意が必要です。',
+        difficulty: 'medium',
+        points: 10
+      }
+    ],
+    techniqueName: '条件網羅',
+    techniqueId: 'condition-coverage',
+    categoryId: 'whitebox',
+    passingScore: 70,
+    totalPoints: 100,
+    estimatedTime: '30分'
   }
 ];
 
@@ -2346,6 +2731,19 @@ export const badges: BadgeDefinition[] = [
       type: 'exercise_completion',
       threshold: 0.8, // 80%以上のスコア
       exerciseIds: ['ex-006']
+    }
+  },
+  {
+    id: 'badge-technique-007',
+    name: '条件網羅マスター',
+    description: '条件網羅テストの演習を高得点で完了しました。複合条件の各要素を効果的に検証するスキルを証明します。',
+    imageUrl: '/badges/black-box.svg',
+    type: 'technique',
+    relatedId: 'condition-coverage',
+    requirement: {
+      type: 'exercise_completion',
+      threshold: 0.8, // 80%以上のスコア
+      exerciseIds: ['ex-007']
     }
   },
   {
