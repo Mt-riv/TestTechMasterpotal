@@ -1,5 +1,6 @@
 import { Route, Switch } from "wouter";
 import { QueryClientProvider } from "@tanstack/react-query";
+import React, { useEffect } from "react";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
@@ -18,8 +19,28 @@ const AppContent = () => {
     isTutorialOpen, 
     closeTutorial, 
     completeTutorial, 
-    tutorialSteps 
+    tutorialSteps, 
+    hasCompletedTutorial,
+    openTutorial
   } = useTutorial();
+
+  // Check localStorage to see if this is the first visit
+  useEffect(() => {
+    // Retrieve from localStorage
+    const hasSeenTutorial = localStorage.getItem('hasSeenTutorial') === 'true';
+    
+    // If user has never seen the tutorial, show it automatically
+    if (!hasSeenTutorial && !hasCompletedTutorial) {
+      // Small delay to ensure everything is loaded
+      const timer = setTimeout(() => {
+        openTutorial();
+        // Mark that user has seen the tutorial at least once
+        localStorage.setItem('hasSeenTutorial', 'true');
+      }, 1000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [hasCompletedTutorial, openTutorial]);
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-800">

@@ -12,17 +12,7 @@ const Home = () => {
   const { openTutorial, hasCompletedTutorial } = useTutorial();
   const [, setLocation] = useLocation();
   
-  // Auto-start tutorial for first-time users
-  useEffect(() => {
-    if (!hasCompletedTutorial) {
-      // Small delay to let the page render first
-      const timeoutId = setTimeout(() => {
-        openTutorial();
-      }, 1000);
-      
-      return () => clearTimeout(timeoutId);
-    }
-  }, [hasCompletedTutorial, openTutorial]);
+  // チュートリアルの自動起動はApp.tsxで一元管理するため、ここでの実装は削除
 
   // If there's a search query or category filter (not 'all'), show filtered results
   const shouldShowFilteredResults = searchQuery || (categoryFilter !== 'all');
