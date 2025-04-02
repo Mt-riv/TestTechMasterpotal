@@ -13,7 +13,7 @@ const Header = () => {
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center">
             <h1 className="text-xl sm:text-lg md:text-xl font-bold gradient-heading max-w-[180px] sm:max-w-md md:max-w-lg whitespace-normal" style={{ fontSize: 'clamp(10pt, 4vw, 20pt)' }}>
-              ソフトウェアテスト技法ライブラリ by YamaY
+              ソフトウェアテスト技法ライブラリ
             </h1>
           </div>
           <div className="flex items-center space-x-4">
