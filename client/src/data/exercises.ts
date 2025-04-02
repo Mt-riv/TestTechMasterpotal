@@ -1490,6 +1490,392 @@ export const exercises: PracticalExercise[] = [
     passingScore: 70,
     totalPoints: 100,
     estimatedTime: '25分'
+  },
+  {
+    id: 'ex-005',
+    title: '命令網羅テストの演習',
+    description: '命令網羅（Statement Coverage）テスト技法を使った実践演習です。',
+    objective: 'この演習では、ソースコード内のすべての命令が少なくとも1回実行されるようなテストケースを設計する方法を学びます。',
+    scenarioDescription: 
+      'あなたはチームの品質保証エンジニアとして、以下の関数をテストする任務を与えられました：\n\n' +
+      '```javascript\n' +
+      'function calculateDiscount(amount, customerType, loyaltyYears) {\n' +
+      '  let discount = 0;\n' +
+      '  \n' +
+      '  if (amount >= 1000) {\n' +
+      '    discount = amount * 0.05; // 5%割引\n' +
+      '  }\n' +
+      '  \n' +
+      '  if (customerType === "premium") {\n' +
+      '    discount += amount * 0.1; // さらに10%割引\n' +
+      '  } else if (customerType === "standard" && loyaltyYears > 2) {\n' +
+      '    discount += amount * 0.05; // さらに5%割引\n' +
+      '  }\n' +
+      '  \n' +
+      '  if (discount > amount * 0.2) {\n' +
+      '    discount = amount * 0.2; // 最大割引は20%まで\n' +
+      '  }\n' +
+      '  \n' +
+      '  return discount;\n' +
+      '}\n' +
+      '```\n\n' +
+      'この関数に対して命令網羅（すべての命令を少なくとも1回実行する）を達成するテストケースを設計してください。',
+    steps: [
+      {
+        stepNumber: 1,
+        description: 'コードを分析し、実行可能なすべての命令（ステートメント）を特定する'
+      },
+      {
+        stepNumber: 2,
+        description: '各命令を少なくとも1回実行するテストケースを設計する'
+      },
+      {
+        stepNumber: 3,
+        description: 'テストケースが命令網羅を達成できているか確認する'
+      },
+      {
+        stepNumber: 4,
+        description: '必要に応じてテストケースを追加または最適化する'
+      }
+    ],
+    quiz: [
+      {
+        id: 'q-005-1',
+        questionText: '命令網羅（Statement Coverage）とは何ですか？',
+        options: [
+          {
+            id: 'q-005-1-a',
+            text: 'すべての条件分岐（true/false）を少なくとも1回テストすること',
+            isCorrect: false,
+            explanation: 'これは分岐網羅（Branch Coverage）の説明であり、命令網羅ではありません。'
+          },
+          {
+            id: 'q-005-1-b',
+            text: 'すべての命令（ステートメント）が少なくとも1回実行されるようにテストすること',
+            isCorrect: true,
+            explanation: '命令網羅とは、プログラム内のすべての命令（ステートメント）が少なくとも1回実行されるようにテストすることです。'
+          },
+          {
+            id: 'q-005-1-c',
+            text: 'すべての関数やメソッドが少なくとも1回呼び出されるようにテストすること',
+            isCorrect: false,
+            explanation: 'これは関数網羅（Function Coverage）の説明であり、命令網羅ではありません。'
+          },
+          {
+            id: 'q-005-1-d',
+            text: 'コード内のすべての可能なパスを少なくとも1回テストすること',
+            isCorrect: false,
+            explanation: 'これはパス網羅（Path Coverage）の説明であり、命令網羅ではありません。'
+          }
+        ],
+        explanation: '命令網羅（Statement Coverage）とは、プログラム内のすべての命令（ステートメント）が少なくとも1回実行されるようにテストすることです。これはホワイトボックステストの最も基本的なカバレッジ基準の1つで、コードの各行が少なくとも1回実行されることを確認します。命令網羅は100%達成しても、すべてのバグが検出されるわけではありませんが、明らかに実行されない「デッドコード」を検出するのに役立ちます。',
+        difficulty: 'easy',
+        points: 5
+      },
+      {
+        id: 'q-005-2',
+        questionText: '上記のcalculateDiscount関数に対する命令網羅を達成するために最低限必要なテストケースの数はいくつですか？',
+        options: [
+          {
+            id: 'q-005-2-a',
+            text: '1つ',
+            isCorrect: false,
+            explanation: '1つのテストケースでは、すべての分岐を通ることができず、すべての命令を網羅できません。'
+          },
+          {
+            id: 'q-005-2-b',
+            text: '2つ',
+            isCorrect: true,
+            explanation: '適切に設計された2つのテストケースで、この関数のすべての命令を網羅することができます。'
+          },
+          {
+            id: 'q-005-2-c',
+            text: '3つ',
+            isCorrect: false,
+            explanation: '3つのテストケースも可能ですが、最低限必要なのは2つです。'
+          },
+          {
+            id: 'q-005-2-d',
+            text: '4つ',
+            isCorrect: false,
+            explanation: '4つのテストケースは必要以上であり、最低限必要なのは2つです。'
+          }
+        ],
+        explanation: 'calculateDiscount関数の命令網羅を達成するには、最低限2つのテストケースが必要です。例えば：\n1. amount=2000, customerType="premium", loyaltyYears=0 → 最初のif文（amount >= 1000）と2番目のif文のpremiumの分岐、最後のif文（割引上限）の命令を実行\n2. amount=500, customerType="standard", loyaltyYears=3 → 最初のif文をスキップし、2番目のif文のstandard && loyaltyYears > 2の分岐、最後のif文をスキップする命令を実行\nこの2つのテストケースで、関数内のすべての命令が少なくとも1回実行されます。',
+        difficulty: 'medium',
+        points: 10
+      },
+      {
+        id: 'q-005-3',
+        questionText: '以下のコードの命令網羅率を100%にするために必要なテストケースを選択してください：\n\n```javascript\nfunction processAge(age) {\n  if (age < 0) {\n    return "無効な年齢";\n  }\n  if (age < 20) {\n    return "未成年";\n  }\n  return "成人";\n}\n```',
+        options: [
+          {
+            id: 'q-005-3-a',
+            text: 'age = 30 のみをテスト',
+            isCorrect: false,
+            explanation: 'このテストケースでは「age < 0」と「age < 20」の条件がどちらもfalseになるため、2つのif文の中の命令は実行されません。'
+          },
+          {
+            id: 'q-005-3-b',
+            text: 'age = -5 と age = 30 をテスト',
+            isCorrect: false,
+            explanation: 'これらのテストケースでは「age < 20」の条件がtrueになる場合が含まれていないため、2番目のif文の中の命令が実行されません。'
+          },
+          {
+            id: 'q-005-3-c',
+            text: 'age = 15 と age = 30 をテスト',
+            isCorrect: false,
+            explanation: 'これらのテストケースでは「age < 0」の条件がtrueになる場合が含まれていないため、最初のif文の中の命令が実行されません。'
+          },
+          {
+            id: 'q-005-3-d',
+            text: 'age = -5, age = 15, age = 30 をテスト',
+            isCorrect: true,
+            explanation: 'これらのテストケースでは、すべての条件分岐と命令が少なくとも1回実行されます。'
+          }
+        ],
+        explanation: 'processAge関数の命令網羅率を100%にするには、以下の3つのパスをすべてテストする必要があります：\n1. age < 0 の場合（例：age = -5）→ "無効な年齢"を返す\n2. age >= 0 かつ age < 20 の場合（例：age = 15）→ "未成年"を返す\n3. age >= 20 の場合（例：age = 30）→ "成人"を返す\nこれら3つのテストケースで、関数内のすべての命令が少なくとも1回実行されます。',
+        difficulty: 'medium',
+        points: 10
+      },
+      {
+        id: 'q-005-4',
+        questionText: '命令網羅テストの限界は何ですか？',
+        options: [
+          {
+            id: 'q-005-4-a',
+            text: '実行速度が非常に遅く、大規模なアプリケーションでは使用できない',
+            isCorrect: false,
+            explanation: '命令網羅テスト自体が特別に遅いわけではなく、テストの実行速度はテスト対象のコードとテスト方法によります。'
+          },
+          {
+            id: 'q-005-4-b',
+            text: '特殊なツールが必要で、一般的なテスト環境では実施できない',
+            isCorrect: false,
+            explanation: '命令網羅テストは一般的なテスト環境でも実施でき、多くのテストカバレッジツールでサポートされています。'
+          },
+          {
+            id: 'q-005-4-c',
+            text: '条件の組み合わせによるバグを検出できない場合がある',
+            isCorrect: true,
+            explanation: '命令網羅テストは各命令が実行されることを確認するだけで、条件の組み合わせによるバグを検出できない場合があります。'
+          },
+          {
+            id: 'q-005-4-d',
+            text: 'レガシーコードには適用できない',
+            isCorrect: false,
+            explanation: '命令網羅テストはレガシーコードを含む任意のコードに適用できます。'
+          }
+        ],
+        explanation: '命令網羅テストの主な限界は、すべての命令が実行されていることを確認するだけで、条件の組み合わせや実行パスによるバグを検出できない場合があることです。例えば、以下のようなコードでは：\n```javascript\nif (a && b) {\n  doSomething();\n}\n```\na=true, b=falseのテストケースでdoSomething()が実行されなくても、命令網羅率は高くなります。しかし、a=true, b=trueのケースでバグが発生する可能性があります。このような条件の組み合わせによるバグを検出するには、分岐網羅や条件網羅などのより高度なカバレッジ基準が必要です。',
+        difficulty: 'medium',
+        points: 10
+      },
+      {
+        id: 'q-005-5',
+        questionText: '以下のコードで命令網羅を達成するテストケースはどれですか？\n\n```javascript\nfunction getGrade(score) {\n  if (score < 0 || score > 100) {\n    return "無効な点数";\n  }\n  \n  if (score >= 90) {\n    return "A";\n  } else if (score >= 80) {\n    return "B";\n  } else if (score >= 70) {\n    return "C";\n  } else if (score >= 60) {\n    return "D";\n  } else {\n    return "F";\n  }\n}\n```',
+        options: [
+          {
+            id: 'q-005-5-a',
+            text: 'score = -10, score = 95, score = 85, score = 75, score = 65, score = 55',
+            isCorrect: true,
+            explanation: 'これらのテストケースでは、無効な点数、A、B、C、D、Fのすべての分岐が実行され、すべての命令が網羅されます。'
+          },
+          {
+            id: 'q-005-5-b',
+            text: 'score = 95, score = 85, score = 75, score = 65, score = 55',
+            isCorrect: false,
+            explanation: 'これらのテストケースでは、無効な点数の分岐が実行されないため、すべての命令が網羅されません。'
+          },
+          {
+            id: 'q-005-5-c',
+            text: 'score = -10, score = 110, score = 90, score = 80, score = 70, score = 60',
+            isCorrect: false,
+            explanation: 'これらのテストケースでは、score = 60のケースでは「D」を返す分岐が実行されますが、「F」を返す分岐が実行されないため、すべての命令が網羅されません。'
+          },
+          {
+            id: 'q-005-5-d',
+            text: 'score = 0, score = 100',
+            isCorrect: false,
+            explanation: 'これらのテストケースでは、score = 0は「F」を返し、score = 100は「A」を返しますが、「B」「C」「D」を返す分岐や無効な点数の分岐が実行されないため、すべての命令が網羅されません。'
+          }
+        ],
+        explanation: 'getGrade関数の命令網羅を達成するには、以下のすべての分岐を実行する必要があります：\n1. 無効な点数のケース（例：score = -10）\n2. A評価のケース（例：score = 95）\n3. B評価のケース（例：score = 85）\n4. C評価のケース（例：score = 75）\n5. D評価のケース（例：score = 65）\n6. F評価のケース（例：score = 55）\nこれらの6つのテストケースで、関数内のすべての命令が少なくとも1回実行されます。',
+        difficulty: 'easy',
+        points: 5
+      },
+      {
+        id: 'q-005-6',
+        questionText: '命令網羅テストの計測方法として正しいのはどれですか？',
+        options: [
+          {
+            id: 'q-005-6-a',
+            text: '実行された命令数 ÷ ソースコードの総行数 × 100',
+            isCorrect: false,
+            explanation: 'ソースコードの総行数にはコメントや空行も含まれるため、これは正確な命令網羅率の計算方法ではありません。'
+          },
+          {
+            id: 'q-005-6-b',
+            text: '実行された命令数 ÷ 実行可能な命令の総数 × 100',
+            isCorrect: true,
+            explanation: 'これが命令網羅率の正確な計算方法です。実行された命令数を実行可能な命令の総数で割り、100を掛けて百分率で表します。'
+          },
+          {
+            id: 'q-005-6-c',
+            text: 'テストケースの数 ÷ プログラム内の条件分岐の数 × 100',
+            isCorrect: false,
+            explanation: 'これは命令網羅率の計算方法ではなく、テストケースと条件分岐の比率を表しています。'
+          },
+          {
+            id: 'q-005-6-d',
+            text: '発見されたバグの数 ÷ テストケースの数 × 100',
+            isCorrect: false,
+            explanation: 'これはバグ検出効率を表す指標であり、命令網羅率の計算方法ではありません。'
+          }
+        ],
+        explanation: '命令網羅率（Statement Coverage）は、以下の式で計算されます：\n\n命令網羅率(%) = (実行された命令数 ÷ 実行可能な命令の総数) × 100\n\n例えば、プログラムに100の実行可能な命令があり、テスト実行中に80の命令が実行された場合、命令網羅率は80%です。この測定にはカバレッジツール（JaCoCoやIstanbulなど）が使用されます。これらのツールは、実行されたコードを追跡し、どの命令が実行されたかを報告します。',
+        difficulty: 'medium',
+        points: 10
+      },
+      {
+        id: 'q-005-7',
+        questionText: '命令網羅を100%達成した場合、以下のうち正しい説明はどれですか？',
+        options: [
+          {
+            id: 'q-005-7-a',
+            text: 'プログラム内のすべてのバグが検出される',
+            isCorrect: false,
+            explanation: '命令網羅が100%でも、条件の組み合わせや特定の実行パスに関連するバグは検出されない可能性があります。'
+          },
+          {
+            id: 'q-005-7-b',
+            text: 'コード内の各命令が少なくとも1回実行されている',
+            isCorrect: true,
+            explanation: '命令網羅が100%とは、まさにコード内の各命令が少なくとも1回実行されていることを意味します。'
+          },
+          {
+            id: 'q-005-7-c',
+            text: 'すべての条件分岐（true/false）が網羅されている',
+            isCorrect: false,
+            explanation: '命令網羅が100%でも、すべての条件分岐が網羅されているとは限りません。これは分岐網羅に関する説明です。'
+          },
+          {
+            id: 'q-005-7-d',
+            text: 'プログラムの品質が完璧であることが保証される',
+            isCorrect: false,
+            explanation: '命令網羅は基本的なコードカバレッジ指標の1つにすぎず、プログラムの品質を完全に保証するものではありません。'
+          }
+        ],
+        explanation: '命令網羅を100%達成したということは、プログラム内のすべての実行可能な命令が少なくとも1回実行されたことを意味します。これはコードの基本的な実行可能性を確認する重要な指標ですが、以下の理由から、すべてのバグが検出されるわけではありません：\n\n1. 複雑な条件の組み合わせによるバグは検出されない可能性がある\n2. 並行処理の問題（競合状態など）は検出されない\n3. 特定のデータ値や境界条件に関連するバグは見逃される可能性がある\n4. 命令が実行されても、その結果が正しいかどうかは命令網羅テストでは検証されない\n\n命令網羅は基本的なテスト網羅基準であり、他のテスト技法と組み合わせて使用することが重要です。',
+        difficulty: 'easy',
+        points: 5
+      },
+      {
+        id: 'q-005-8',
+        questionText: '以下のコードに対する命令網羅テストで見逃す可能性が高いバグはどれですか？\n\n```javascript\nfunction divideNumbers(a, b) {\n  if (b !== 0) {\n    return a / b;\n  } else {\n    return "エラー: ゼロでの除算";\n  }\n}\n```',
+        options: [
+          {
+            id: 'q-005-8-a',
+            text: 'b = 0の場合のゼロ除算エラー',
+            isCorrect: false,
+            explanation: 'このコードではb = 0の場合は明示的に処理されており、命令網羅テストでカバーされます。'
+          },
+          {
+            id: 'q-005-8-b',
+            text: 'a = 0の場合の戻り値が0になるケース',
+            isCorrect: false,
+            explanation: 'a = 0の場合は数学的に正しく0を返すはずであり、これはバグではありません。'
+          },
+          {
+            id: 'q-005-8-c',
+            text: 'b = null または undefined の場合の不適切な結果',
+            isCorrect: true,
+            explanation: 'b = null または undefined の場合、「b !== 0」は true になりますが、その後の除算でエラーが発生する可能性があります。命令網羅テストでは通常このようなケースはテストされません。'
+          },
+          {
+            id: 'q-005-8-d',
+            text: 'a と b が両方とも0の場合のエラー',
+            isCorrect: false,
+            explanation: 'a = 0, b = 0の場合は「b !== 0」の条件で false となり、"エラー: ゼロでの除算"が返されます。これは適切な処理であり、命令網羅テストでカバーされます。'
+          }
+        ],
+        explanation: '命令網羅テストは、各命令が少なくとも1回実行されることを確認するだけで、すべての入力値や特殊なケースをテストするわけではありません。この例では、以下の2つのテストケースで命令網羅を達成できます：\n1. a = 10, b = 2 → 「b !== 0」が true で、a / b = 5 を返す\n2. a = 10, b = 0 → 「b !== 0」が false で、"エラー: ゼロでの除算" を返す\n\nしかし、b = null または undefined などの特殊なケースはテストされない可能性があります。JavaScript では「null !== 0」と「undefined !== 0」は true になるため、条件分岐は通過しますが、その後の「a / null」や「a / undefined」は「NaN」を返します。これはバグとなる可能性がありますが、命令網羅テストだけでは見逃される可能性が高いです。',
+        difficulty: 'hard',
+        points: 15
+      },
+      {
+        id: 'q-005-9',
+        questionText: '命令網羅と分岐網羅の違いを最もよく説明しているのはどれですか？',
+        options: [
+          {
+            id: 'q-005-9-a',
+            text: '命令網羅はすべての命令が実行されることを確認し、分岐網羅はすべての条件分岐（true/false）が実行されることを確認する',
+            isCorrect: true,
+            explanation: 'これが命令網羅と分岐網羅の主な違いです。分岐網羅は条件式のすべての結果（trueとfalse）を網羅するのに対し、命令網羅は各命令が少なくとも1回実行されることを確認します。'
+          },
+          {
+            id: 'q-005-9-b',
+            text: '命令網羅はホワイトボックステスト技法で、分岐網羅はブラックボックステスト技法である',
+            isCorrect: false,
+            explanation: '両方ともホワイトボックステスト技法であり、コードの内部構造に基づいています。'
+          },
+          {
+            id: 'q-005-9-c',
+            text: '命令網羅はユニットテストで使用され、分岐網羅は統合テストで使用される',
+            isCorrect: false,
+            explanation: '両方ともさまざまなレベルのテスト（ユニットテスト、統合テストなど）で使用できます。'
+          },
+          {
+            id: 'q-005-9-d',
+            text: '命令網羅は自動テストで使用され、分岐網羅は手動テストで使用される',
+            isCorrect: false,
+            explanation: '両方とも自動テストと手動テストの両方で使用できます。'
+          }
+        ],
+        explanation: '命令網羅と分岐網羅の主な違いは以下の通りです：\n\n- 命令網羅（Statement Coverage）：プログラム内のすべての命令（ステートメント）が少なくとも1回実行されることを確認します。\n\n- 分岐網羅（Branch Coverage）：すべての条件分岐（if、switch、for文などの制御構造の各分岐）が少なくとも1回実行されることを確認します。これは条件式の結果がtrue/falseの両方のケースを含みます。\n\n例えば、以下のコードでは：\n```javascript\nif (a > b) {\n  return a;\n} else {\n  return b;\n}\n```\n\n命令網羅を100%達成するには、if文が実行され、どちらかの分岐が実行されれば十分です。しかし、分岐網羅を100%達成するには、a > b が true と false の両方のケースをテストする必要があります。分岐網羅は通常、命令網羅よりも厳格なカバレッジ基準です。',
+        difficulty: 'medium',
+        points: 10
+      },
+      {
+        id: 'q-005-10',
+        questionText: 'テストで命令網羅を考慮すべき主な理由は何ですか？',
+        options: [
+          {
+            id: 'q-005-10-a',
+            text: 'テストケースを削減し、テスト工数を最小化するため',
+            isCorrect: false,
+            explanation: '命令網羅は通常テストケースを増やす効果があり、工数を最小化するためのものではありません。'
+          },
+          {
+            id: 'q-005-10-b',
+            text: 'バグを100%検出するため',
+            isCorrect: false,
+            explanation: '命令網羅はバグを100%検出することを保証するものではありません。'
+          },
+          {
+            id: 'q-005-10-c',
+            text: '使用されていないコード（デッドコード）を検出するため',
+            isCorrect: true,
+            explanation: '命令網羅を測定することで、テストによって実行されていないコード（デッドコードや到達不能コード）を特定できます。'
+          },
+          {
+            id: 'q-005-10-d',
+            text: 'コードの実行時間を測定するため',
+            isCorrect: false,
+            explanation: '命令網羅はコードの実行時間を測定するためのものではありません。'
+          }
+        ],
+        explanation: '命令網羅を考慮する主な理由の1つは、使用されていないコード（デッドコード）や到達不能なコードを検出するためです。命令網羅率が低い場合、それはテストによって実行されていないコードが存在することを示します。これは以下のような理由で問題となる可能性があります：\n\n1. テストされていないコードにバグが潜んでいる可能性がある\n2. 実際には必要のないコードがプログラムに含まれている（コード肥大化）\n3. 条件分岐に論理エラーがあり、特定のコードに到達できない\n\n命令網羅は基本的なコードカバレッジ指標であり、他のテスト技法と組み合わせることで、より包括的なテスト戦略を構築できます。',
+        difficulty: 'easy',
+        points: 5
+      }
+    ],
+    techniqueName: '命令網羅',
+    techniqueId: 'statement-coverage',
+    categoryId: 'whitebox',
+    passingScore: 70,
+    totalPoints: 100,
+    estimatedTime: '25分'
   }
 ];
 
@@ -1548,12 +1934,37 @@ export const badges: BadgeDefinition[] = [
     }
   },
   {
+    id: 'badge-technique-005',
+    name: '命令網羅マスター',
+    description: '命令網羅テストの演習を高得点で完了しました。ソースコードの実行網羅性を効果的に検証できます。',
+    imageUrl: '/badges/black-box.svg',
+    type: 'technique',
+    relatedId: 'statement-coverage',
+    requirement: {
+      type: 'exercise_completion',
+      threshold: 0.8, // 80%以上のスコア
+      exerciseIds: ['ex-005']
+    }
+  },
+  {
     id: 'badge-category-001',
     name: 'ブラックボックステストの達人',
     description: 'ブラックボックステストカテゴリのすべての演習を完了しました。入力と出力の関係を分析する専門家です。',
     imageUrl: '/badges/black-box.svg',
     type: 'category',
     relatedId: 'blackbox',
+    requirement: {
+      type: 'category_mastery',
+      threshold: 0.7 // 70%以上の平均スコア
+    }
+  },
+  {
+    id: 'badge-category-002',
+    name: 'ホワイトボックステストの達人',
+    description: 'ホワイトボックステストカテゴリのすべての演習を完了しました。コードの内部構造を解析する専門家です。',
+    imageUrl: '/badges/black-box.svg', // 後で適切なアイコンに変更予定
+    type: 'category',
+    relatedId: 'whitebox',
     requirement: {
       type: 'category_mastery',
       threshold: 0.7 // 70%以上の平均スコア
