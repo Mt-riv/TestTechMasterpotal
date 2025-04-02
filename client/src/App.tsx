@@ -8,11 +8,27 @@ import CategoryView from "@/pages/CategoryView";
 import TechniqueDetail from "@/pages/TechniqueDetail";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "./context/AppContext";
 
 function App() {
   const { isDarkMode, isSidebarOpen, toggleSidebar } = useContext(AppContext);
+
+  // ダークモードのクラスを適用
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [isDarkMode]);
+
+  // サイドバーオーバーレイクリック処理
+  const handleOverlayClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    toggleSidebar();
+    console.log("Sidebar overlay clicked, hiding sidebar");
+  };
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -24,7 +40,7 @@ function App() {
             {isSidebarOpen && (
               <div 
                 className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden" 
-                onClick={toggleSidebar}
+                onClick={handleOverlayClick}
                 aria-hidden="true"
               />
             )}

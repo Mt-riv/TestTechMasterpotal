@@ -6,13 +6,27 @@ import { Sun, Moon, Menu } from "lucide-react";
 const Header = () => {
   const { isDarkMode, toggleDarkMode, isSidebarOpen, toggleSidebar } = useContext(AppContext);
 
+  // ダークモード切り替え処理
+  const handleDarkModeToggle = (e: React.MouseEvent) => {
+    e.preventDefault();
+    toggleDarkMode();
+    console.log("Dark mode toggled:", !isDarkMode);
+  };
+
+  // サイドバー切り替え処理
+  const handleSidebarToggle = (e: React.MouseEvent) => {
+    e.preventDefault();
+    toggleSidebar();
+    console.log("Sidebar toggled:", !isSidebarOpen);
+  };
+
   return (
     <header className="bg-white shadow-md dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center">
             <button 
-              onClick={toggleSidebar} 
+              onClick={handleSidebarToggle} 
               className="p-2 rounded-md bg-gray-100 dark:bg-gray-700 text-primary hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
               aria-label={isSidebarOpen ? "メニューを閉じる" : "メニューを開く"}
             >
@@ -27,7 +41,7 @@ const Header = () => {
               <SearchBar />
             </div>
             <button 
-              onClick={toggleDarkMode} 
+              onClick={handleDarkModeToggle} 
               className="p-2 rounded-md bg-gray-100 dark:bg-gray-700 text-primary hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
               aria-label={isDarkMode ? "ライトモードに切り替え" : "ダークモードに切り替え"}
             >

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link, useLocation } from "wouter";
+import { useLocation, useRoute } from "wouter";
 import { AppContext } from "../context/AppContext";
 import { categories } from "../data/categories";
 import { techniques } from "../data/techniques";
@@ -11,8 +11,8 @@ import {
 } from "lucide-react";
 
 const Sidebar = () => {
-  const { isSidebarOpen, setCategoryFilter, categoryFilter } = useContext(AppContext);
-  const [location] = useLocation();
+  const { isSidebarOpen, toggleSidebar, setCategoryFilter, categoryFilter } = useContext(AppContext);
+  const [location, setLocation] = useLocation();
   
   // Get popular techniques - first 5 from the techniques array
   const popularTechniques = techniques.slice(0, 5);
@@ -41,8 +41,20 @@ const Sidebar = () => {
     }
   };
 
+  // カテゴリーをクリックしたときの処理
   const handleCategoryClick = (categoryId: string) => {
     setCategoryFilter(categoryId);
+    // wouter の setLocation でルーティング
+    if (categoryId === 'all') {
+      setLocation('/');
+    } else {
+      setLocation(`/category/${categoryId}`);
+    }
+    // モバイル表示の場合はサイドバーを閉じる
+    if (window.innerWidth < 1024) {
+      toggleSidebar();
+    }
+    console.log("Category clicked:", categoryId);
   };
 
   return (
@@ -56,19 +68,20 @@ const Sidebar = () => {
         <div className="mt-2 space-y-1">
           {categories.map((category) => (
             <div key={category.id}>
-              <Link href={category.id === 'all' ? '/' : `/category/${category.id}`}>
-                <div
-                  onClick={() => handleCategoryClick(category.id)}
-                  className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all cursor-pointer ${
-                    categoryFilter === category.id
-                      ? "bg-gradient-to-r from-primary/15 to-purple-500/15 text-primary-600 dark:text-primary-400 font-bold"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400"
-                  }`}
-                >
-                  {getCategoryIcon(category.id)}
-                  <span>{category.name}</span>
-                </div>
-              </Link>
+              <div
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleCategoryClick(category.id);
+                }}
+                className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all cursor-pointer ${
+                  categoryFilter === category.id
+                    ? "bg-gradient-to-r from-primary/15 to-purple-500/15 text-primary-600 dark:text-primary-400 font-bold"
+                    : "text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400"
+                }`}
+              >
+                {getCategoryIcon(category.id)}
+                <span>{category.name}</span>
+              </div>
             </div>
           ))}
         </div>
@@ -79,12 +92,21 @@ const Sidebar = () => {
         <div className="mt-2 space-y-1">
           {popularTechniques.map(technique => (
             <div key={technique.id}>
-              <Link href={`/technique/${technique.id}`}>
-                <div className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400 transition-all cursor-pointer">
-                  {getTechniqueIcon(technique.id)}
-                  <span>{technique.name}</span>
-                </div>
-              </Link>
+              <div
+                onClick={(e) => {
+                  // wouter の setLocation でルーティング
+                  setLocation(`/technique/${technique.id}`);
+                  // モバイル表示の場合はサイドバーを閉じる
+                  if (window.innerWidth < 1024) {
+                    toggleSidebar();
+                  }
+                  console.log("Technique clicked:", technique.id);
+                }}
+                className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400 transition-all cursor-pointer"
+              >
+                {getTechniqueIcon(technique.id)}
+                <span>{technique.name}</span>
+              </div>
             </div>
           ))}
         </div>
@@ -93,18 +115,24 @@ const Sidebar = () => {
       <div className="px-4 mt-8">
         <h3 className="text-sm font-bold text-primary uppercase tracking-wider px-3 mb-2">リソース</h3>
         <div className="mt-2 space-y-1">
-          <div className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400 transition-all cursor-pointer">
+          <button 
+            className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400 transition-all cursor-pointer"
+          >
             <Book className="mr-3 h-5 w-5 text-primary/70" />
             <span>テスト技法ガイド</span>
-          </div>
-          <div className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400 transition-all cursor-pointer">
+          </button>
+          <button 
+            className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400 transition-all cursor-pointer"
+          >
             <GraduationCap className="mr-3 h-5 w-5 text-primary/70" />
             <span>学習パス</span>
-          </div>
-          <div className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400 transition-all cursor-pointer">
+          </button>
+          <button 
+            className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400 transition-all cursor-pointer"
+          >
             <ExternalLink className="mr-3 h-5 w-5 text-primary/70" />
             <span>外部リンク集</span>
-          </div>
+          </button>
         </div>
       </div>
       
