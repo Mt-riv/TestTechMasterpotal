@@ -1876,6 +1876,395 @@ export const exercises: PracticalExercise[] = [
     passingScore: 70,
     totalPoints: 100,
     estimatedTime: '25分'
+  },
+  {
+    id: 'ex-006',
+    title: '分岐網羅テストの演習',
+    description: '分岐網羅（Branch Coverage）テスト技法を使った実践演習です。',
+    objective: 'この演習では、プログラムのすべての条件分岐（true/false）を少なくとも1回実行するテストケースを設計する方法を学びます。',
+    scenarioDescription: 
+      'あなたはソフトウェア開発会社のQAエンジニアとして、以下の関数をテストする任務を与えられました：\n\n' +
+      '```javascript\n' +
+      'function calculateInsurance(age, hasMedicalCondition, yearsWithCompany) {\n' +
+      '  let premium = 5000; // 基本保険料\n' +
+      '  \n' +
+      '  if (age < 25) {\n' +
+      '    premium += 1500; // 若年層リスク追加\n' +
+      '  } else if (age >= 65) {\n' +
+      '    premium += 2000; // 高齢層リスク追加\n' +
+      '  }\n' +
+      '  \n' +
+      '  if (hasMedicalCondition) {\n' +
+      '    premium *= 1.5; // 健康状態による増額\n' +
+      '  }\n' +
+      '  \n' +
+      '  // 長期顧客割引\n' +
+      '  if (yearsWithCompany > 5) {\n' +
+      '    premium *= 0.9; // 10%割引\n' +
+      '  } else if (yearsWithCompany > 2) {\n' +
+      '    premium *= 0.95; // 5%割引\n' +
+      '  }\n' +
+      '  \n' +
+      '  return premium;\n' +
+      '}\n' +
+      '```\n\n' +
+      'この関数に対して分岐網羅（すべての条件分岐のtrue/falseの結果が少なくとも1回実行される）を達成するテストケースを設計してください。',
+    steps: [
+      {
+        stepNumber: 1,
+        description: 'コードを分析し、すべての条件分岐を特定する'
+      },
+      {
+        stepNumber: 2,
+        description: '各条件分岐のtrueとfalseの結果を少なくとも1回実行するテストケースを設計する'
+      },
+      {
+        stepNumber: 3,
+        description: 'テストケースが分岐網羅を達成できているか確認する'
+      },
+      {
+        stepNumber: 4,
+        description: '必要に応じてテストケースを追加または最適化する'
+      }
+    ],
+    quiz: [
+      {
+        id: 'q-006-1',
+        questionText: '分岐網羅（Branch Coverage）テストとは何ですか？',
+        options: [
+          {
+            id: 'q-006-1-a',
+            text: 'プログラム内のすべての命令が少なくとも1回実行されるようにテストすること',
+            isCorrect: false,
+            explanation: 'これは命令網羅（Statement Coverage）の説明です。'
+          },
+          {
+            id: 'q-006-1-b',
+            text: 'プログラム内のすべての条件分岐（true/false）が少なくとも1回実行されるようにテストすること',
+            isCorrect: true,
+            explanation: '分岐網羅は、if、switch、whileなどの制御構造のすべての条件分岐（trueとfalseの両方の結果）が少なくとも1回実行されることを確認するテスト手法です。'
+          },
+          {
+            id: 'q-006-1-c',
+            text: 'プログラム内のすべての可能なパスが実行されるようにテストすること',
+            isCorrect: false,
+            explanation: 'これはパス網羅（Path Coverage）の説明です。すべての可能なパスをテストすることは、複雑なプログラムでは現実的でない場合が多いです。'
+          },
+          {
+            id: 'q-006-1-d',
+            text: 'プログラム内のすべての関数が少なくとも1回呼び出されるようにテストすること',
+            isCorrect: false,
+            explanation: 'これは関数網羅（Function Coverage）の説明です。'
+          }
+        ],
+        explanation: '分岐網羅（Branch Coverage）は、プログラム内のすべての条件分岐が少なくとも1回実行されることを確認するホワイトボックステスト技法です。例えば、if (condition)文がある場合、conditionがtrueになるケースとfalseになるケースの両方をテストします。これにより、条件分岐に関連するバグを見つけやすくなります。分岐網羅は命令網羅よりも厳格なテスト基準であり、より多くのテストケースが必要になる場合があります。',
+        difficulty: 'easy',
+        points: 5
+      },
+      {
+        id: 'q-006-2',
+        questionText: '上記のcalculateInsurance関数の分岐網羅を達成するために必要なテストケースの最小数はいくつですか？',
+        options: [
+          {
+            id: 'q-006-2-a',
+            text: '3つ',
+            isCorrect: false,
+            explanation: '3つのテストケースでは、すべての条件分岐（trueとfalse）を網羅することはできません。'
+          },
+          {
+            id: 'q-006-2-b',
+            text: '4つ',
+            isCorrect: true,
+            explanation: '適切に設計された4つのテストケースで、この関数のすべての条件分岐を網羅することができます。'
+          },
+          {
+            id: 'q-006-2-c',
+            text: '6つ',
+            isCorrect: false,
+            explanation: '6つのテストケースは必要以上です。最小数は4つです。'
+          },
+          {
+            id: 'q-006-2-d',
+            text: '8つ',
+            isCorrect: false,
+            explanation: '8つのテストケースは必要以上です。最小数は4つです。'
+          }
+        ],
+        explanation: 'calculateInsurance関数の分岐網羅を達成するには、以下の条件分岐をすべてカバーする必要があります：\n1. age < 25 (true/false)\n2. age >= 65 (true/false、ただしage < 25がfalseの場合のみ関連)\n3. hasMedicalCondition (true/false)\n4. yearsWithCompany > 5 (true/false)\n5. yearsWithCompany > 2 (true/false、ただしyearsWithCompany > 5がfalseの場合のみ関連)\n\nこれらをカバーする最小のテストケースセットは4つです：\n例：\n- TC1: age=20, hasMedicalCondition=true, yearsWithCompany=6 (age<25=true, hasMedicalCondition=true, yearsWithCompany>5=true)\n- TC2: age=30, hasMedicalCondition=false, yearsWithCompany=3 (age<25=false, age>=65=false, hasMedicalCondition=false, yearsWithCompany>5=false, yearsWithCompany>2=true)\n- TC3: age=70, hasMedicalCondition=true, yearsWithCompany=1 (age<25=false, age>=65=true, hasMedicalCondition=true, yearsWithCompany>5=false, yearsWithCompany>2=false)\n- TC4: age=30, hasMedicalCondition=false, yearsWithCompany=1 (yearsWithCompany>2=falseをカバー)',
+        difficulty: 'medium',
+        points: 10
+      },
+      {
+        id: 'q-006-3',
+        questionText: '次のコードの分岐網羅率を100%にするためには、どのようなテストケースが必要ですか？\n\n```javascript\nfunction validatePassword(password) {\n  if (!password || password.length < 8) {\n    return "パスワードは8文字以上必要です";\n  }\n  \n  if (!/[A-Z]/.test(password)) {\n    return "パスワードは少なくとも1つの大文字を含む必要があります";\n  }\n  \n  if (!/[0-9]/.test(password)) {\n    return "パスワードは少なくとも1つの数字を含む必要があります";\n  }\n  \n  return "パスワードは有効です";\n}\n```',
+        options: [
+          {
+            id: 'q-006-3-a',
+            text: 'password = "Password1" のみ',
+            isCorrect: false,
+            explanation: 'このテストケースではすべての条件がfalseになるため、trueの場合の分岐が実行されません。'
+          },
+          {
+            id: 'q-006-3-b',
+            text: 'password = "short", password = "Password1"',
+            isCorrect: false,
+            explanation: 'これらのテストケースでは、!/[0-9]/.test(password)がtrueになる分岐がカバーされていません。'
+          },
+          {
+            id: 'q-006-3-c',
+            text: 'password = null, password = "short", password = "password1", password = "PASSWORD", password = "Password1"',
+            isCorrect: true,
+            explanation: 'これらのテストケースはすべての条件分岐をカバーしています。'
+          },
+          {
+            id: 'q-006-3-d',
+            text: 'password = "short", password = "longpassword", password = "UPPERCASE", password = "12345678"',
+            isCorrect: false,
+            explanation: 'これらのテストケースでは、パスワードがnullまたは未定義の場合の分岐がカバーされていません。'
+          }
+        ],
+        explanation: 'validatePassword関数の分岐網羅率を100%にするには、以下のすべての条件分岐をカバーする必要があります：\n\n1. !password || password.length < 8 (true/false)\n   - trueの場合：password = null または password = "short"\n   - falseの場合：password = "password1"など8文字以上\n\n2. !/[A-Z]/.test(password) (true/false、最初の条件がfalseの場合のみ実行)\n   - trueの場合：password = "password1" (大文字なし)\n   - falseの場合：password = "Password1"など大文字あり\n\n3. !/[0-9]/.test(password) (true/false、最初と2番目の条件がfalseの場合のみ実行)\n   - trueの場合：password = "Password" (数字なし)\n   - falseの場合：password = "Password1"など数字あり\n\nすべての分岐をカバーするには、少なくとも次のようなテストケースが必要です：\n- password = null（または未定義）：最初の条件のtrueをカバー\n- password = "short"：最初の条件のtrueをカバー（別の方法で）\n- password = "password1"：最初の条件のfalse、2番目の条件のtrueをカバー\n- password = "PASSWORD"：最初と2番目の条件のfalse、3番目の条件のtrueをカバー\n- password = "Password1"：すべての条件のfalseをカバー',
+        difficulty: 'medium',
+        points: 10
+      },
+      {
+        id: 'q-006-4',
+        questionText: '複合条件を含むif文の分岐網羅テストに関する説明として正しいのはどれですか？',
+        options: [
+          {
+            id: 'q-006-4-a',
+            text: '複合条件（a && b）は一つの条件として扱い、trueとfalseの2つの分岐のみをテストすればよい',
+            isCorrect: false,
+            explanation: 'これは単純な分岐網羅の考え方ですが、複合条件の場合は不十分です。複合条件の各部分の組み合わせをテストする必要があります。'
+          },
+          {
+            id: 'q-006-4-b',
+            text: '複合条件（a && b）の場合、分岐網羅を達成するには少なくとも3つのテストケースが必要である',
+            isCorrect: true,
+            explanation: '複合条件a && bの分岐網羅を達成するには、(true, true)、(false, *)、(true, false)の少なくとも3つのケースが必要です。ただし、条件の評価が短絡評価される言語では、(false, *)のケースで2番目の条件は評価されないことがあります。'
+          },
+          {
+            id: 'q-006-4-c',
+            text: '複合条件は各部分を個別の条件として分解し、それぞれを独立してテストするべきである',
+            isCorrect: false,
+            explanation: '各部分を独立してテストするだけでは不十分で、複合条件が全体としてどのように評価されるかをテストする必要があります。'
+          },
+          {
+            id: 'q-006-4-d',
+            text: 'if (a && b) {...} else {...}の分岐網羅テストは、単純なif (condition) {...} else {...}と同じように2つのテストケースで達成できる',
+            isCorrect: false,
+            explanation: '複合条件の場合、単純な条件より多くのテストケースが必要です。a && bの場合、少なくとも3つのテストケースが必要です。'
+          }
+        ],
+        explanation: '複合条件（例：a && b）を含むif文の分岐網羅テストでは、単に条件全体がtrueまたはfalseになるケースをテストするだけでは不十分です。条件の各部分が結果にどのように影響するかを考慮する必要があります。\n\n例えば、if (a && b) {...}の場合：\n\n1. a=true, b=trueのとき、条件全体はtrueになる\n2. a=false, b=任意の値のとき、条件全体はfalseになる（短絡評価により、bは評価されない可能性がある）\n3. a=true, b=falseのとき、条件全体はfalseになる\n\nこれらの3つのケースをテストすることで、複合条件の分岐網羅が達成されます。ORの条件（a || b）も同様に考えることができます。\n\nこのように、複合条件を含むif文の分岐網羅テストでは、条件の各部分の組み合わせを考慮する必要があり、単純な条件よりも多くのテストケースが必要になります。',
+        difficulty: 'hard',
+        points: 15
+      },
+      {
+        id: 'q-006-5',
+        questionText: '次のコードの分岐網羅テストに必要なテストケースの最小数はいくつですか？\n\n```javascript\nfunction checkEligibility(age, income, creditScore) {\n  if (age >= 18 && age <= 65) {\n    if (income >= 30000 || creditScore >= 700) {\n      return "適格";\n    }\n  }\n  return "不適格";\n}\n```',
+        options: [
+          {
+            id: 'q-006-5-a',
+            text: '2つ',
+            isCorrect: false,
+            explanation: '2つのテストケースでは、すべての条件分岐をカバーすることはできません。'
+          },
+          {
+            id: 'q-006-5-b',
+            text: '3つ',
+            isCorrect: false,
+            explanation: '3つのテストケースでは、すべての条件分岐をカバーすることはできません。'
+          },
+          {
+            id: 'q-006-5-c',
+            text: '4つ',
+            isCorrect: true,
+            explanation: '適切に設計された4つのテストケースで、この関数のすべての条件分岐をカバーすることができます。'
+          },
+          {
+            id: 'q-006-5-d',
+            text: '5つ',
+            isCorrect: false,
+            explanation: '5つのテストケースは必要以上です。最小数は4つです。'
+          }
+        ],
+        explanation: 'checkEligibility関数の分岐網羅を達成するには、以下の条件分岐をすべてカバーする必要があります：\n\n1. age >= 18 && age <= 65 (true/false)\n   - true: 18 <= age <= 65\n   - false: age < 18 または age > 65\n\n2. income >= 30000 || creditScore >= 700 (true/false、最初の条件がtrueの場合のみ実行)\n   - true: income >= 30000 または creditScore >= 700\n   - false: income < 30000 かつ creditScore < 700\n\nこれらをカバーする最小のテストケースセットは4つです：\n\n1. age = 17, income = 任意, creditScore = 任意 (age >= 18 && age <= 65がfalseになるケース、age < 18)\n2. age = 70, income = 任意, creditScore = 任意 (age >= 18 && age <= 65がfalseになるケース、age > 65)\n3. age = 30, income = 35000, creditScore = 650 (age >= 18 && age <= 65がtrue、income >= 30000 || creditScore >= 700がtrueになるケース、income >= 30000)\n4. age = 30, income = 25000, creditScore = 650 (age >= 18 && age <= 65がtrue、income >= 30000 || creditScore >= 700がfalseになるケース)\n\n注: 3番目のテストケースは、income >= 30000がtrueでcreditScore >= 700がfalseです。同様に、age = 30, income = 25000, creditScore = 750のようなテストケース（income >= 30000がfalseでcreditScore >= 700がtrue）も作成できますが、論理和（OR）の分岐網羅には、どちらか一方がtrue、両方ともfalseの2ケースで十分です。',
+        difficulty: 'medium',
+        points: 10
+      },
+      {
+        id: 'q-006-6',
+        questionText: '分岐網羅と条件網羅の違いを最もよく説明しているのはどれですか？',
+        options: [
+          {
+            id: 'q-006-6-a',
+            text: '分岐網羅はif文などの各分岐を実行するのに対し、条件網羅は複合条件の各条件の真偽をすべて組み合わせてテストする',
+            isCorrect: true,
+            explanation: 'これは分岐網羅と条件網羅の主な違いを正確に説明しています。条件網羅はより厳格なテスト基準です。'
+          },
+          {
+            id: 'q-006-6-b',
+            text: '分岐網羅はホワイトボックステストで、条件網羅はブラックボックステストである',
+            isCorrect: false,
+            explanation: '両方ともホワイトボックステスト技法です。'
+          },
+          {
+            id: 'q-006-6-c',
+            text: '分岐網羅はプログラムの全ての命令を実行し、条件網羅はすべての条件を実行する',
+            isCorrect: false,
+            explanation: 'これは正確ではありません。命令を実行するのは命令網羅です。分岐網羅はすべての分岐を実行します。'
+          },
+          {
+            id: 'q-006-6-d',
+            text: '分岐網羅は関数レベルで適用され、条件網羅はプログラム全体に適用される',
+            isCorrect: false,
+            explanation: '両方とも任意のレベル（関数、モジュール、プログラム全体）に適用できます。'
+          }
+        ],
+        explanation: '分岐網羅と条件網羅の主な違いは以下の通りです：\n\n- 分岐網羅（Branch Coverage）：プログラム内のすべての分岐（if、while、for文などの制御構造の各分岐）が少なくとも1回実行されることを確認します。つまり、各条件の結果がtrueとfalseの両方の場合が実行されることを確認します。\n\n- 条件網羅（Condition Coverage）：複合条件の各部分が個別にtrueとfalseの両方の値を取ることを確認します。例えば、if (a && b)という条件の場合、条件網羅は以下の組み合わせをすべてテストすることを要求します：\n  * a=true, b=true\n  * a=true, b=false\n  * a=false, b=true\n  * a=false, b=false\n\n条件網羅は分岐網羅よりも厳格なテスト基準であり、より多くのテストケースが必要になります。条件の数が増えるにつれて、必要なテストケースの数は指数関数的に増加します。例えば、n個の条件がある場合、条件網羅には最大2^n個のテストケースが必要になる可能性があります。',
+        difficulty: 'medium',
+        points: 10
+      },
+      {
+        id: 'q-006-7',
+        questionText: '分岐網羅テストの限界に関する説明として正しいのはどれですか？',
+        options: [
+          {
+            id: 'q-006-7-a',
+            text: '分岐網羅テストは、複合条件内の個々の条件が結果に与える影響を完全に評価できない',
+            isCorrect: true,
+            explanation: 'これは分岐網羅テストの主な限界の1つです。複合条件内の各条件の組み合わせをすべてテストするには、条件網羅が必要です。'
+          },
+          {
+            id: 'q-006-7-b',
+            text: '分岐網羅テストは、プログラムのパフォーマンスの問題を検出できない',
+            isCorrect: false,
+            explanation: 'これはどのカバレッジ基準にも当てはまります。パフォーマンステストは別の種類のテストです。'
+          },
+          {
+            id: 'q-006-7-c',
+            text: '分岐網羅テストは、ユーザーインターフェースの使いやすさの問題を検出できない',
+            isCorrect: false,
+            explanation: 'これはどのカバレッジ基準にも当てはまります。使いやすさのテストは別の種類のテストです。'
+          },
+          {
+            id: 'q-006-7-d',
+            text: '分岐網羅テストは、オブジェクト指向プログラミングには適用できない',
+            isCorrect: false,
+            explanation: '分岐網羅テストはオブジェクト指向プログラミングを含むあらゆるプログラミングパラダイムに適用できます。'
+          }
+        ],
+        explanation: '分岐網羅テストの主な限界の1つは、複合条件内の個々の条件が結果に与える影響を完全に評価できないことです。例えば、if (a && b)という条件があるとき、分岐網羅は条件全体がtrueとfalseの両方になるケースをテストしますが、aとbの個々の値のすべての組み合わせをテストするわけではありません。\n\n例えば、次のテストケースセットは分岐網羅を達成します：\n- a=true, b=true（条件全体はtrue）\n- a=false, b=true（条件全体はfalse）\n\nしかし、a=true, b=falseという組み合わせはテストされていません。この組み合わせでバグが発生する可能性があります。\n\n他の限界として、分岐網羅だけではループ内の繰り返し回数に関連するバグや、例外処理のすべてのパスをカバーできない場合があります。また、データの依存関係やタイミングの問題も検出できません。\n\nこれらの限界を克服するには、条件網羅、パス網羅、データフロー網羅などの他のテスト技法と組み合わせる必要があります。',
+        difficulty: 'hard',
+        points: 15
+      },
+      {
+        id: 'q-006-8',
+        questionText: '次のコードが正しく動作するために、分岐網羅テストが特に重要な理由は何ですか？\n\n```javascript\nfunction processPayment(amount, accountBalance, isCreditCard) {\n  if (amount <= 0) {\n    return "無効な金額";\n  }\n  \n  if (!isCreditCard && amount > accountBalance) {\n    return "残高不足";\n  }\n  \n  // 支払い処理のコード...\n  \n  return "支払い完了";\n}\n```',
+        options: [
+          {
+            id: 'q-006-8-a',
+            text: '複雑なビジネスロジックが含まれているため',
+            isCorrect: false,
+            explanation: 'このコードのビジネスロジックは比較的単純です。'
+          },
+          {
+            id: 'q-006-8-b',
+            text: '金融トランザクションを扱うため、エラー条件のテストが重要である',
+            isCorrect: true,
+            explanation: '金融トランザクションを扱うコードでは、すべてのエラー条件と成功条件が適切に処理されることを確認することが重要です。分岐網羅テストはこれを達成するのに役立ちます。'
+          },
+          {
+            id: 'q-006-8-c',
+            text: 'ループを含む処理があるため',
+            isCorrect: false,
+            explanation: 'このコードにはループは含まれていません。'
+          },
+          {
+            id: 'q-006-8-d',
+            text: '再帰呼び出しがあるため',
+            isCorrect: false,
+            explanation: 'このコードには再帰呼び出しは含まれていません。'
+          }
+        ],
+        explanation: '金融トランザクションを扱うコード（支払い処理など）では、セキュリティと正確性が非常に重要です。このようなコードでは、すべてのエラー条件が適切に検出され、処理されることを確認する必要があります。\n\n分岐網羅テストは、以下の重要な条件分岐をすべてテストすることを確実にします：\n\n1. amount <= 0 (true/false) - 無効な金額のチェック\n2. !isCreditCard && amount > accountBalance (true/false) - 残高不足のチェック\n\nこれらの条件が正しく処理されないと、以下のような問題が発生する可能性があります：\n- 負の金額での支払いが処理される\n- 残高不足の状態で支払いが処理される\n- 有効な支払いが誤って拒否される\n\n分岐網羅テストにより、これらの条件のすべての結果が適切に処理されることを確認できます。金融アプリケーションでは、このような徹底的なテストが不可欠です。',
+        difficulty: 'easy',
+        points: 5
+      },
+      {
+        id: 'q-006-9',
+        questionText: '次のコードの分岐網羅テストを実施する際、見落としやすいテストケースはどれですか？\n\n```javascript\nfunction calculateShipping(weight, distance, isExpressDelivery) {\n  let cost = 0;\n  \n  if (weight <= 0 || distance <= 0) {\n    throw new Error("無効なパラメータ");\n  }\n  \n  if (weight < 5) {\n    cost = 500;\n  } else if (weight < 20) {\n    cost = 1000;\n  } else {\n    cost = 2000;\n  }\n  \n  if (distance > 100) {\n    cost += 500;\n  }\n  \n  if (isExpressDelivery) {\n    cost *= 1.5;\n  }\n  \n  return cost;\n}\n```',
+        options: [
+          {
+            id: 'q-006-9-a',
+            text: 'weight = 0, distance = 50, isExpressDelivery = false',
+            isCorrect: false,
+            explanation: 'これは無効なパラメータ（weight <= 0）のケースであり、明示的にチェックされています。テスターはこのケースを見落とさない可能性が高いです。'
+          },
+          {
+            id: 'q-006-9-b',
+            text: 'weight = 6, distance = 120, isExpressDelivery = true',
+            isCorrect: false,
+            explanation: 'これは通常のテストケースであり、見落とされる可能性は低いです。'
+          },
+          {
+            id: 'q-006-9-c',
+            text: 'weight = 5, distance = 50, isExpressDelivery = false',
+            isCorrect: true,
+            explanation: 'weight = 5は境界値であり、weight < 5とweight < 20の両方の条件でfalseとなります。このような境界値は見落とされやすいです。'
+          },
+          {
+            id: 'q-006-9-d',
+            text: 'weight = 25, distance = 0, isExpressDelivery = false',
+            isCorrect: false,
+            explanation: 'これは無効なパラメータ（distance <= 0）のケースであり、明示的にチェックされています。テスターはこのケースを見落とさない可能性が高いです。'
+          }
+        ],
+        explanation: '分岐網羅テストでは、境界値や特殊なケースが見落とされやすいです。このコードでは、weight = 5は特に注意が必要な境界値です。\n\nweight = 5の場合：\n- weight < 5 は false\n- weight < 20 は true\n- したがって、cost = 1000が設定されます\n\nこの境界値をテストしないと、例えばプログラマーが誤って weight <= 5 と書いてしまった場合、バグを見逃す可能性があります。\n\n他にも以下のような境界値があります：\n- weight = 20: weight < 20 の境界値\n- distance = 100: distance > 100 の境界値\n\n分岐網羅テストを行う際は、単に各条件のtrueとfalseをテストするだけでなく、このような境界値も考慮することが重要です。テスターはしばしば「明白な」テストケース（非常に小さい値、非常に大きい値など）に集中し、境界値を見落とすことがあります。',
+        difficulty: 'hard',
+        points: 15
+      },
+      {
+        id: 'q-006-10',
+        questionText: '分岐網羅テストを自動化する際の最適なアプローチはどれですか？',
+        options: [
+          {
+            id: 'q-006-10-a',
+            text: '手動でテストケースを作成し、それらを自動テストフレームワークで実行する',
+            isCorrect: false,
+            explanation: 'これは可能なアプローチですが、分岐網羅テストの自動化には最適ではありません。大規模なコードベースでは非効率的です。'
+          },
+          {
+            id: 'q-006-10-b',
+            text: 'カバレッジツールを使用して分岐網羅率を測定し、不足している分岐を特定する',
+            isCorrect: true,
+            explanation: 'カバレッジツールを使用することで、どの分岐がテストされていないかを特定し、効率的にテストケースを追加できます。'
+          },
+          {
+            id: 'q-006-10-c',
+            text: 'すべての可能な入力の組み合わせを網羅的にテストする',
+            isCorrect: false,
+            explanation: 'すべての入力の組み合わせをテストすることは、多くの場合、現実的ではありません。入力の数が増えると、組み合わせは指数関数的に増加します。'
+          },
+          {
+            id: 'q-006-10-d',
+            text: 'ランダムテスト（ファジングなど）を使用して、できるだけ多くの分岐をカバーする',
+            isCorrect: false,
+            explanation: 'ランダムテストは一部の分岐をカバーするのに役立ちますが、すべての分岐を系統的にカバーすることは保証されません。'
+          }
+        ],
+        explanation: '分岐網羅テストを効果的に自動化するための最適なアプローチは、カバレッジツールを使用して分岐網羅率を測定し、不足している分岐を特定することです。\n\nこのアプローチの利点は以下の通りです：\n\n1. 客観的な測定: カバレッジツールは、どの分岐がテストされていないかを正確に報告します。\n\n2. 効率性: テスターは不足している分岐を特定し、それらをカバーするための特定のテストケースを作成できます。\n\n3. 継続的インテグレーション: カバレッジレポートを継続的インテグレーションプロセスに組み込むことで、分岐網羅率が低下した場合に警告を受けることができます。\n\n4. 可視化: 多くのカバレッジツールは、どの分岐がテストされていないかを視覚的に表示し、問題領域を特定するのに役立ちます。\n\n人気のあるカバレッジツールには以下のようなものがあります：\n- JavaScript: Istanbul, Jest\n- Java: JaCoCo, Cobertura\n- Python: Coverage.py\n- C#: NCover, dotCover\n- Ruby: SimpleCov\n\nこれらのツールを使用することで、分岐網羅テストをより効率的かつ効果的に自動化できます。',
+        difficulty: 'medium',
+        points: 10
+      }
+    ],
+    techniqueName: '分岐網羅',
+    techniqueId: 'branch-coverage',
+    categoryId: 'whitebox',
+    passingScore: 70,
+    totalPoints: 100,
+    estimatedTime: '30分'
   }
 ];
 
@@ -1944,6 +2333,19 @@ export const badges: BadgeDefinition[] = [
       type: 'exercise_completion',
       threshold: 0.8, // 80%以上のスコア
       exerciseIds: ['ex-005']
+    }
+  },
+  {
+    id: 'badge-technique-006',
+    name: '分岐網羅マスター',
+    description: '分岐網羅テストの演習を高得点で完了しました。条件分岐を効果的に検証するスキルを証明します。',
+    imageUrl: '/badges/black-box.svg',
+    type: 'technique',
+    relatedId: 'branch-coverage',
+    requirement: {
+      type: 'exercise_completion',
+      threshold: 0.8, // 80%以上のスコア
+      exerciseIds: ['ex-006']
     }
   },
   {
