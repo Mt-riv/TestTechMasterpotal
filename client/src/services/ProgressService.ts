@@ -67,7 +67,7 @@ function saveUserBadges(userBadges: UserBadge[]): void {
   }
 }
 
-// バッジ獲得の確認と更新
+// バッジ獲得の確認と更新（戻り値：新たに獲得したバッジの配列）
 export function checkAndUpdateBadges(): UserBadge[] {
   const progressList = getProgress();
   const currentBadges = getUserBadges();
@@ -94,6 +94,9 @@ export function checkAndUpdateBadges(): UserBadge[] {
       };
       
       newBadges.push(newBadge);
+      
+      // バッジ獲得のログ（デバッグ用）
+      console.log(`バッジ獲得: ${newBadge.name}`);
     }
   });
   

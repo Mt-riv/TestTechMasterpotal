@@ -312,34 +312,52 @@ export const ExerciseView: React.FC<ExerciseViewProps> = ({ exercise, goBack }) 
             
             {!showResults ? (
               <div className="flex justify-end mt-6">
-                <Button onClick={handleSubmit}>
-                  回答を提出する
+                <Button 
+                  onClick={handleSubmit}
+                  className="bg-gradient-to-r from-primary to-purple-600 hover:opacity-90"
+                >
+                  採点する
                 </Button>
               </div>
             ) : (
-              <div className="bg-gray-50 dark:bg-gray-900/50 p-4 rounded-lg mt-6">
-                <div className="text-center mb-4">
-                  <h3 className="text-xl font-bold">結果</h3>
-                  <p className="text-lg">
-                    スコア: <span className={score >= exercise.passingScore ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}>
+              <div className={`p-6 rounded-lg mt-6 ${score >= exercise.passingScore ? 'bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800' : 'bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700'}`}>
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold mb-2">採点結果</h3>
+                  <p className="text-xl mb-2">
+                    スコア: <span className={score >= exercise.passingScore ? 'text-green-600 dark:text-green-400 font-bold' : 'text-red-600 dark:text-red-400'}>
                       {score}/{exercise.totalPoints}点
                     </span>
                   </p>
                   <p className="text-gray-600 dark:text-gray-400">
                     {score >= exercise.passingScore
-                      ? 'おめでとうございます！演習を完了しました。'
+                      ? 'おめでとうございます！演習を合格しました。'
                       : `合格には${exercise.passingScore}点以上が必要です。`}
                   </p>
                 </div>
                 
+                {score >= exercise.passingScore && (
+                  <div className="mb-6 text-center">
+                    <div className="inline-flex items-center justify-center p-4 bg-gradient-to-r from-primary/10 to-purple-500/10 rounded-full mb-2">
+                      <Award className="h-10 w-10 text-primary" />
+                    </div>
+                    <h4 className="text-lg font-semibold mb-1">バッジを獲得しました！</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {exercise.techniqueName}のスキルを証明するバッジがあなたのコレクションに追加されました。
+                    </p>
+                  </div>
+                )}
+                
                 <div className="flex justify-center space-x-4">
                   {score < exercise.passingScore && (
-                    <Button onClick={handleRetry}>
+                    <Button 
+                      onClick={handleRetry}
+                      className="bg-gradient-to-r from-primary to-purple-600 hover:opacity-90"
+                    >
                       もう一度挑戦する
                     </Button>
                   )}
-                  <Button variant="outline" onClick={handleGoBack}>
-                    テスト技法一覧に戻る
+                  <Button variant={score >= exercise.passingScore ? "default" : "outline"} onClick={handleGoBack}>
+                    {score >= exercise.passingScore ? "バッジを確認する" : "テスト技法一覧に戻る"}
                   </Button>
                 </div>
               </div>
