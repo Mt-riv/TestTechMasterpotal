@@ -123,6 +123,10 @@ const Home = () => {
                   <CheckCircle className="h-4 w-4 text-primary mr-2" />
                   <span>クラシフィケーションツリー</span>
                 </li>
+                <li className="flex items-center">
+                  <CheckCircle className="h-4 w-4 text-primary mr-2" />
+                  <span>状態遷移テスト</span>
+                </li>
               </ul>
             </div>
           </div>
