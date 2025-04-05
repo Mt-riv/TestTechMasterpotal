@@ -48,8 +48,7 @@ const Home = () => {
 
         <div className="grid gap-6 md:grid-cols-2">
           {filteredTechniques.map((technique) => (
-            <Link key={technique.id} href={`/technique/${technique.id}`}>
-              <a className="card-hover bg-white dark:bg-gray-800 shadow-md rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <Link key={technique.id} href={`/technique/${technique.id}`} className="card-hover bg-white dark:bg-gray-800 shadow-md rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700 overflow-hidden">
                 <div className="p-5">
                   <div className="flex justify-between items-start">
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white">{technique.name}</h3>
@@ -72,7 +71,6 @@ const Home = () => {
                     </span>
                   </div>
                 </div>
-              </a>
             </Link>
           ))}
         </div>
