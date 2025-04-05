@@ -6,8 +6,6 @@ import { techniques } from "../data/techniques";
 import { filterTechniques } from "../hooks/useSearch";
 import { useTutorial } from "../context/TutorialContext";
 import { CheckCircle, Box, Code, Lightbulb, Puzzle, ChevronRight } from "lucide-react";
-// 通常の相対パスを使用
-import backgroundImage from "../assets/library-background.png";
 
 const Home = () => {
   const { searchQuery, categoryFilter, setCategoryFilter } = useContext(AppContext);
@@ -87,9 +85,9 @@ const Home = () => {
       <div 
         className="fixed inset-0 bg-cover bg-center bg-no-repeat opacity-50" 
         style={{ 
-          backgroundImage: `url(${backgroundImage})`,
-          filter: 'blur(1px)',
-          zIndex: -1,
+          backgroundImage: "url('/images/library-background.png')",
+          backgroundSize: 'cover',
+          zIndex: -1
         }}
       />
       
