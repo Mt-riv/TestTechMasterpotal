@@ -119,7 +119,7 @@ const Home = () => {
                 </li>
                 <li className="flex items-center">
                   <CheckCircle className="h-4 w-4 text-primary mr-2" />
-                  <span>クラシフィケーションツリー</span>
+                  <span style={{ wordBreak: 'keep-all' }}>クラシフィケーション<wbr />ツリー</span>
                 </li>
                 <li className="flex items-center">
                   <CheckCircle className="h-4 w-4 text-primary mr-2" />
