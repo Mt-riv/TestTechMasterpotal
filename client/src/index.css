@@ -52,4 +52,12 @@
   .section-title {
     @apply text-2xl font-bold mb-6 pb-2 border-b border-gray-200 dark:border-gray-700;
   }
+  
+  .home-bg-container {
+    @apply relative z-0 py-8 px-4 sm:px-6 rounded-lg mb-8;
+  }
+  
+  .home-content {
+    @apply relative z-10 bg-white/80 dark:bg-gray-800/90 p-6 rounded-lg shadow-lg backdrop-blur-sm;
+  }
 }
