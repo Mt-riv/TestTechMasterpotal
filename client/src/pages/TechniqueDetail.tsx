@@ -345,10 +345,8 @@ const TechniqueDetail = () => {
                   {technique.relatedTechniques.map((relTechnique, index) => (
                     <li key={index} className="flex items-center">
                       <ArrowRight className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mr-2" />
-                      <Link href={`/technique/${relTechnique.id}`}>
-                        <a className="text-primary-600 dark:text-primary-400 hover:underline cursor-pointer">
-                          {relTechnique.name}
-                        </a>
+                      <Link href={`/technique/${relTechnique.id}`} className="text-primary-600 dark:text-primary-400 hover:underline cursor-pointer">
+                        {relTechnique.name}
                       </Link>
                       <span className="ml-2">- {relTechnique.description}</span>
                     </li>
