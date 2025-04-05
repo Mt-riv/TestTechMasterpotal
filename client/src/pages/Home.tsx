@@ -6,6 +6,7 @@ import { techniques } from "../data/techniques";
 import { filterTechniques } from "../hooks/useSearch";
 import { useTutorial } from "../context/TutorialContext";
 import { CheckCircle, Box, Code, Lightbulb, Puzzle, ChevronRight } from "lucide-react";
+// 通常の相対パスを使用
 import backgroundImage from "../assets/library-background.png";
 
 const Home = () => {
@@ -84,7 +85,7 @@ const Home = () => {
     <div className="relative max-w-3xl mx-auto">
       {/* 背景画像 - Covers the whole page */}
       <div 
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat opacity-10" 
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat opacity-50" 
         style={{ 
           backgroundImage: `url(${backgroundImage})`,
           filter: 'blur(1px)',
@@ -93,14 +94,14 @@ const Home = () => {
       />
       
       <div className="home-bg-container">
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 p-6 bg-white/90 dark:bg-gray-800/90 rounded-lg shadow-lg backdrop-blur-sm">
           <h1 className="gradient-heading mb-4 text-2xl md:text-3xl">ソフトウェアテスト技法を体系的に学ぶ</h1>
           <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">効果的なテストケース設計のための様々な技法を探索してください</p>
         </div>
       </div>
 
       {/* Category Cards */}
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2 mb-10">
         {/* BlackBox Testing Card */}
         <div 
           onClick={() => handleCategoryClick('blackbox')} 
