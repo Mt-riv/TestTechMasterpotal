@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getProgress, getUserBadges } from '../../services/ProgressService';
+import { getProgress, getUserBadges, checkAndUpdateBadges } from '../../services/ProgressService';
 import { exercises } from '../../data/exercises';
 import { techniques } from '../../data/techniques';
 import { categories } from '../../data/categories';
@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { BadgeDisplay } from './BadgeDisplay';
-import { Award, BarChart3, CheckCircle, Clock, MessageSquare } from 'lucide-react';
+import { Award, BarChart3, CheckCircle, Clock, MessageSquare, RefreshCw } from 'lucide-react';
 import { Link } from 'wouter';
 import { formatDate } from '../../lib/utils';
 
@@ -19,8 +19,17 @@ export const ProgressDashboard: React.FC = () => {
 
   useEffect(() => {
     // 進捗とバッジの取得
-    setProgress(getProgress());
-    setBadges(getUserBadges());
+    const progressData = getProgress();
+    setProgress(progressData);
+    
+    // バッジの取得と更新チェック
+    const badgesData = getUserBadges();
+    setBadges(badgesData);
+    
+    console.log('ProgressDashboard - 読み込み時のデータ:', { 
+      progressData: progressData.length, 
+      badgesData: badgesData.length 
+    });
   }, []);
 
   // カテゴリごとの進捗率を計算
@@ -221,8 +230,33 @@ export const ProgressDashboard: React.FC = () => {
   const renderBadgesTab = () => {
     const groupedBadges = groupBadgesByType();
     
+    // バッジの手動更新処理
+    const handleRefreshBadges = () => {
+      console.log('バッジを手動で更新します...');
+      const newBadges = checkAndUpdateBadges();
+      
+      if (newBadges.length > 0) {
+        console.log(`${newBadges.length}個の新しいバッジを獲得しました！`, newBadges);
+        setBadges(getUserBadges()); // バッジリストを更新
+      } else {
+        console.log('新しく獲得したバッジはありません');
+        alert('新しく獲得できるバッジはありませんでした。');
+      }
+    };
+    
     return (
       <div className="space-y-6">
+        <div className="flex justify-between items-center">
+          <h3 className="text-lg font-medium">獲得したバッジ</h3>
+          <button 
+            onClick={handleRefreshBadges}
+            className="text-sm flex items-center py-1 px-3 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition"
+          >
+            <RefreshCw className="h-4 w-4 mr-1" />
+            バッジを更新
+          </button>
+        </div>
+        
         {groupedBadges.achievement.length > 0 && (
           <BadgeDisplay
             badges={groupedBadges.achievement}

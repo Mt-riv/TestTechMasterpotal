@@ -27,8 +27,15 @@ const TechniqueDetail = () => {
 
   // Load user badges
   useEffect(() => {
-    setUserBadges(getUserBadges());
-  }, []);
+    // バッジの取得と表示
+    const badges = getUserBadges();
+    setUserBadges(badges);
+    console.log(`TechniqueDetail - バッジ読み込み(技法ID: ${id}):`, badges.length);
+    
+    // 同じ技法関連のバッジだけフィルタして表示
+    const techBadges = badges.filter(b => b.type === 'technique' && b.relatedId === id);
+    console.log(`TechniqueDetail - この技法のバッジ:`, techBadges);
+  }, [id]);
   
   if (!technique || !category) {
     return (
