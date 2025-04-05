@@ -68,7 +68,6 @@ const CategoryView = () => {
                   </span>
                 </div>
               </div>
-            </a>
           </Link>
         ))}
       </div>
