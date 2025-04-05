@@ -67,16 +67,16 @@ const TechniqueDetail = () => {
       <nav className="mb-6">
         <ol className="flex text-sm">
           <li>
-            <Link href="/">
-              <a className="text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 cursor-pointer">ホーム</a>
+            <Link href="/" className="text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 cursor-pointer">
+              ホーム
             </Link>
           </li>
           <li className="mx-2 text-gray-500 dark:text-gray-400">
             <ChevronRight className="h-4 w-4" />
           </li>
           <li>
-            <Link href={`/category/${technique.category}`}>
-              <a className="text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 cursor-pointer">{category.name}</a>
+            <Link href={`/category/${technique.category}`} className="text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 cursor-pointer">
+              {category.name}
             </Link>
           </li>
           <li className="mx-2 text-gray-500 dark:text-gray-400">
