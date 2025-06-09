@@ -3023,6 +3023,239 @@ export const exercises: PracticalExercise[] = [
     passingScore: 70,
     totalPoints: 100,
     estimatedTime: '30分'
+  },
+  {
+    id: 'ex-008',
+    title: 'VSTeP（可変強度テストパラメータ）の演習',
+    description: 'VSTeP（Variable Strength Test Parameter）技法を使った実践演習です。',
+    objective: 'この演習では、パラメータの重要度に応じて可変の強度レベルを適用し、効率的で効果的な組み合わせテストを設計する方法を学びます。',
+    scenarioDescription: 
+      'あなたはクラウドベースのWebアプリケーションの品質保証チームに所属しています。このシステムには多数の設定パラメータがあり、従来の固定強度組み合わせテストではテストケース数が現実的でなくなってしまいました。\n\n' +
+      'VSTeP技法を用いて、パラメータの重要度に応じた可変強度レベルを設定し、効率的かつ効果的なテスト戦略を設計する必要があります。',
+    steps: [
+      {
+        stepNumber: 1,
+        description: 'システムのパラメータを特定し、ビジネス上の重要度と技術的リスクに基づいて分類する'
+      },
+      {
+        stepNumber: 2,
+        description: '各パラメータグループに対して適切な強度レベル（t-way）を設定する'
+      },
+      {
+        stepNumber: 3,
+        description: '制約条件を定義し、不可能な組み合わせを除外する'
+      },
+      {
+        stepNumber: 4,
+        description: '可変強度設定に基づいてテストケースを生成し、その効果性を評価する'
+      }
+    ],
+    quiz: [
+      {
+        id: 'q-007-1',
+        questionText: 'VSTeP技法の主な利点として最も適切なものはどれですか？',
+        options: [
+          {
+            id: 'q-007-1-a',
+            text: 'すべてのパラメータに同じ強度を適用することで一貫性を保つ',
+            isCorrect: false,
+            explanation: 'VSTePは逆に、パラメータごとに異なる強度を適用することが特徴です。'
+          },
+          {
+            id: 'q-007-1-b',
+            text: '重要度に応じた可変強度により、効率性と効果性を両立させる',
+            isCorrect: true,
+            explanation: 'VSTePの最大の利点は、重要なパラメータには高い強度を、重要でないパラメータには低い強度を適用することで、限られたリソースで最大の効果を得ることです。'
+          },
+          {
+            id: 'q-007-1-c',
+            text: '実行時間を短縮するためにテストケース数を最小限に抑える',
+            isCorrect: false,
+            explanation: 'テストケース数の削減は副次的な効果であり、主目的は重要度に応じた効果的なテスト配分です。'
+          },
+          {
+            id: 'q-007-1-d',
+            text: 'パラメータ間の依存関係を自動的に検出する',
+            isCorrect: false,
+            explanation: '依存関係の検出はVSTePの機能ではありません。依存関係は事前に分析し、制約条件として定義する必要があります。'
+          }
+        ],
+        explanation: 'VSTePは、パラメータの重要度に基づいて可変の強度レベルを適用することで、限られたリソースを効果的に配分し、重要な不具合を見逃すリスクを最小限に抑えます。',
+        difficulty: 'medium',
+        points: 15
+      },
+      {
+        id: 'q-007-2',
+        questionText: '以下のWebアプリケーションのパラメータについて、VSTePで適切な強度レベル設定はどれですか？\n\nパラメータ:\n- 認証方式（OAuth, SAML, Basic）\n- データベース接続プール設定（最小、最大、タイムアウト）\n- UI言語設定（日本語、英語、中国語）\n- ログレベル（DEBUG, INFO, WARN, ERROR）',
+        options: [
+          {
+            id: 'q-007-2-a',
+            text: 'すべてのパラメータに3-wayを適用',
+            isCorrect: false,
+            explanation: 'すべてに同じ強度を適用するのは従来の固定強度テストであり、VSTePではありません。'
+          },
+          {
+            id: 'q-007-2-b',
+            text: '認証方式・DB接続プール：3-way、UI言語・ログレベル：2-way',
+            isCorrect: true,
+            explanation: '認証とデータベース接続はセキュリティと可用性に直接影響する重要なパラメータなので3-way、UI言語とログレベルは相対的に重要度が低いので2-wayが適切です。'
+          },
+          {
+            id: 'q-007-2-c',
+            text: 'すべてのパラメータに2-wayを適用',
+            isCorrect: false,
+            explanation: '重要なセキュリティパラメータも2-wayでは、重要な相互作用を見逃すリスクがあります。'
+          },
+          {
+            id: 'q-007-2-d',
+            text: 'UI言語：3-way、その他：2-way',
+            isCorrect: false,
+            explanation: 'UI言語よりも認証方式やデータベース接続プールの方がシステムの安定性とセキュリティに重要な影響を与えます。'
+          }
+        ],
+        explanation: 'VSTePでは、セキュリティ、可用性、性能に影響する重要なパラメータには高い強度を、ユーザビリティやデバッグ関連のパラメータには低い強度を適用します。',
+        difficulty: 'hard',
+        points: 20
+      },
+      {
+        id: 'q-007-3',
+        questionText: 'VSTePの設計プロセスで最も重要なステップはどれですか？',
+        options: [
+          {
+            id: 'q-007-3-a',
+            text: 'テストケースの実行',
+            isCorrect: false,
+            explanation: 'テストケースの実行は最終段階であり、設計プロセスの最重要ステップではありません。'
+          },
+          {
+            id: 'q-007-3-b',
+            text: 'パラメータの重要度分析',
+            isCorrect: true,
+            explanation: 'パラメータの重要度分析は、適切な強度レベル設定の基礎となる最も重要なステップです。この分析が不適切だと、効果的なVSTePテストは実現できません。'
+          },
+          {
+            id: 'q-007-3-c',
+            text: 'ツールの選択',
+            isCorrect: false,
+            explanation: 'ツールの選択は重要ですが、パラメータの重要度分析が適切でなければ、どんなツールを使っても効果的なテストは設計できません。'
+          },
+          {
+            id: 'q-007-3-d',
+            text: 'テストケース数の算出',
+            isCorrect: false,
+            explanation: 'テストケース数の算出は結果であり、重要度分析に基づく強度設定が先に必要です。'
+          }
+        ],
+        explanation: 'VSTePの成功は、パラメータの重要度を正確に分析し、適切な強度レベルを設定することにかかっています。これにはドメイン知識と技術的理解の両方が必要です。',
+        difficulty: 'medium',
+        points: 15
+      },
+      {
+        id: 'q-007-4',
+        questionText: 'VSTePで制約条件を定義する主な目的は何ですか？',
+        options: [
+          {
+            id: 'q-007-4-a',
+            text: 'テストケース数を減らすため',
+            isCorrect: false,
+            explanation: 'テストケース数の削減は副次的な効果であり、主目的ではありません。'
+          },
+          {
+            id: 'q-007-4-b',
+            text: '実行不可能または無意味な組み合わせを除外するため',
+            isCorrect: true,
+            explanation: '制約条件は、技術的に不可能な組み合わせやビジネス的に意味のない組み合わせを除外し、現実的で意味のあるテストケースのみを生成するために定義します。'
+          },
+          {
+            id: 'q-007-4-c',
+            text: 'パラメータの重要度を決定するため',
+            isCorrect: false,
+            explanation: 'パラメータの重要度は制約条件とは別のプロセスで決定されます。'
+          },
+          {
+            id: 'q-007-4-d',
+            text: '強度レベルを自動計算するため',
+            isCorrect: false,
+            explanation: '強度レベルは重要度分析に基づいて設定され、制約条件は直接関係しません。'
+          }
+        ],
+        explanation: '制約条件により、現実的で実行可能なテストケースのみが生成され、テストの効率性と実用性が向上します。',
+        difficulty: 'medium',
+        points: 10
+      },
+      {
+        id: 'q-007-5',
+        questionText: 'IoTデバイスの設定で、以下のパラメータ群に対するVSTePの適用として最も適切なものはどれですか？\n\nパラメータ群:\nA) ハードウェア設定（CPU周波数、メモリサイズ、電源タイプ）\nB) 通信設定（WiFi、Bluetooth、5G）\nC) アプリケーション設定（ログレベル、更新間隔）\nD) 診断設定（デバッグモード、テストモード）',
+        options: [
+          {
+            id: 'q-007-5-a',
+            text: 'A,B: 2-way、C,D: 3-way',
+            isCorrect: false,
+            explanation: 'ハードウェアと通信設定はデバイスの基本動作に重要で、より高い強度が必要です。'
+          },
+          {
+            id: 'q-007-5-b',
+            text: 'A,B: 3-way、C,D: 2-way',
+            isCorrect: true,
+            explanation: 'ハードウェアと通信設定はデバイスの安定性と接続性に直接影響するため3-way、アプリケーションと診断設定は相対的に重要度が低いため2-wayが適切です。'
+          },
+          {
+            id: 'q-007-5-c',
+            text: 'すべて3-wayで統一',
+            isCorrect: false,
+            explanation: 'すべて同じ強度を適用するのはVSTePではなく、従来の固定強度テストです。'
+          },
+          {
+            id: 'q-007-5-d',
+            text: 'A: 4-way、B,C,D: 2-way',
+            isCorrect: false,
+            explanation: '通信設定も重要で、ハードウェア設定と同程度の強度が必要です。4-wayは過度に高い強度です。'
+          }
+        ],
+        explanation: 'IoTデバイスでは、ハードウェアと通信の安定性が最重要であり、これらのパラメータ間の相互作用を十分にテストする必要があります。',
+        difficulty: 'hard',
+        points: 20
+      },
+      {
+        id: 'q-007-6',
+        questionText: 'VSTePの継続的改善プロセスで最も重要な活動はどれですか？',
+        options: [
+          {
+            id: 'q-007-6-a',
+            text: 'テスト結果に基づく強度レベルの見直し',
+            isCorrect: true,
+            explanation: 'VSTePの効果を最大化するには、テスト結果から得られた知見を基に強度レベル設定を継続的に改善することが重要です。'
+          },
+          {
+            id: 'q-007-6-b',
+            text: 'より高性能なツールへの移行',
+            isCorrect: false,
+            explanation: 'ツールの性能向上は有用ですが、適切な強度設定の改善ほど重要ではありません。'
+          },
+          {
+            id: 'q-007-6-c',
+            text: 'テストケース数の削減',
+            isCorrect: false,
+            explanation: 'テストケース数の削減自体は目的ではなく、効果的なテスト設計の結果です。'
+          },
+          {
+            id: 'q-007-6-d',
+            text: '新しいパラメータの追加',
+            isCorrect: false,
+            explanation: 'パラメータの追加は必要に応じて行いますが、既存設定の最適化の方が重要です。'
+          }
+        ],
+        explanation: '実際のテスト結果から学習し、パラメータの重要度認識や強度設定を改善することで、VSTePの効果を継続的に向上させることができます。',
+        difficulty: 'medium',
+        points: 20
+      }
+    ],
+    techniqueName: 'VSTeP（可変強度テストパラメータ）',
+    techniqueId: 'vstep',
+    categoryId: 'blackbox',
+    passingScore: 75,
+    totalPoints: 120,
+    estimatedTime: '35分'
   }
 ];
 
@@ -3117,6 +3350,19 @@ export const badges: BadgeDefinition[] = [
       type: 'exercise_completion',
       threshold: 0.8, // 80%以上のスコア
       exerciseIds: ['ex-007']
+    }
+  },
+  {
+    id: 'badge-technique-008',
+    name: 'VSTeP マスター',
+    description: 'VSTeP（可変強度テストパラメータ）の演習を高得点で完了しました。効率的で戦略的な組み合わせテスト設計の専門家です。',
+    imageUrl: '/badges/vstep.svg',
+    type: 'technique',
+    relatedId: 'vstep',
+    requirement: {
+      type: 'exercise_completion',
+      threshold: 0.8, // 80%以上のスコア
+      exerciseIds: ['ex-008']
     }
   },
   {
