@@ -28,23 +28,46 @@
 
 ### インストール手順
 
+#### 方法1: 自動セットアップ（推奨）
+
+**Unix/Linux/macOS:**
+```bash
+git clone <repository-url>
+cd <project-directory>
+./local-dev.sh
+```
+
+**Windows:**
+```cmd
+git clone <repository-url>
+cd <project-directory>
+local-dev.bat
+```
+
+#### 方法2: 手動セットアップ
+
 1. **リポジトリのクローン**
 ```bash
 git clone <repository-url>
 cd <project-directory>
 ```
 
-2. **依存関係のインストール**
+2. **Node.js バージョン確認**
+```bash
+node --version  # 18.0.0以上必須
+```
+
+3. **依存関係のインストール**
 ```bash
 npm install
 ```
 
-3. **開発サーバーの起動**
+4. **開発サーバーの起動**
 ```bash
 npm run dev
 ```
 
-4. **ブラウザでアクセス**
+5. **ブラウザでアクセス**
 ```
 http://localhost:5000
 ```
