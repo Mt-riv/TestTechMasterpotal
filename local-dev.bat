@@ -31,5 +31,10 @@ if not defined PORT set PORT=5000
 echo Starting development server on port %PORT%...
 echo Open http://localhost:%PORT% in your browser
 
-REM Start the development server
-npm run dev
+REM Use compatibility mode for older Node.js versions
+if %NODE_MAJOR% LSS 20 (
+    echo Using compatibility mode for Node.js %NODE_VERSION%
+    node start-local.js
+) else (
+    npm run dev
+)

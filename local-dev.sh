@@ -26,5 +26,10 @@ export PORT=${PORT:-5000}
 echo "Starting development server on port $PORT..."
 echo "Open http://localhost:$PORT in your browser"
 
-# Start the development server
-npm run dev
+# Use the local starter for better compatibility
+if [ "$NODE_VERSION" -lt 20 ]; then
+    echo "Using compatibility mode for Node.js $NODE_VERSION"
+    node start-local.js
+else
+    npm run dev
+fi
