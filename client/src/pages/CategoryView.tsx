@@ -29,7 +29,7 @@ const CategoryView = () => {
         <h2 className="text-2xl font-bold text-gray-900">カテゴリーが見つかりません</h2>
         <p className="mt-4 text-gray-600">指定されたカテゴリーは存在しません。</p>
         <Link href="/">
-          <a className="mt-6 inline-block text-purple-600 hover:text-purple-800">
+          <a className="mt-6 inline-block text-purple-800 hover:text-purple-900">
             ホームに戻る
           </a>
         </Link>
@@ -57,10 +57,10 @@ const CategoryView = () => {
                 <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">{technique.shortDescription}</p>
                 <div className="mt-4 flex items-center text-sm bg-gray-50 dark:bg-gray-700/50 p-2 rounded-md">
                   <span className="text-gray-700 dark:text-gray-300 mr-4 font-medium">
-                    効果: <span className="text-purple-600 dark:text-purple-400">{technique.effectiveness}</span>
+                    効果: <span className="text-purple-800 dark:text-purple-300">{technique.effectiveness}</span>
                   </span>
                   <span className="text-gray-700 dark:text-gray-300 font-medium">
-                    複雑度: <span className="text-purple-600 dark:text-purple-400">{technique.complexity}</span>
+                    複雑度: <span className="text-purple-800 dark:text-purple-300">{technique.complexity}</span>
                   </span>
                 </div>
               </div>
