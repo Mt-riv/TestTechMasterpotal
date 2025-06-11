@@ -5,6 +5,7 @@ import { categories } from "../data/categories";
 import { techniques } from "../data/techniques";
 import { filterTechniques } from "../hooks/useSearch";
 import { useTutorial } from "../context/TutorialContext";
+import { getCategoryColorClass, getCategoryCardClass, getCategoryIconClass } from "../lib/utils";
 import { CheckCircle, Box, Code, Lightbulb, Puzzle, ChevronRight } from "lucide-react";
 
 const Home = () => {
@@ -52,12 +53,7 @@ const Home = () => {
                 <div className="p-5">
                   <div className="flex justify-between items-start">
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white">{technique.name}</h3>
-                    <span className={`category-badge ${
-                      technique.category === 'blackbox' ? 'bg-gradient-to-r from-primary/80 to-blue-500/80 text-white' : 
-                      technique.category === 'whitebox' ? 'bg-gradient-to-r from-indigo-500/80 to-blue-600/80 text-white' :
-                      technique.category === 'experience' ? 'bg-gradient-to-r from-amber-500/80 to-orange-500/80 text-white' :
-                      'bg-gradient-to-r from-purple-500/80 to-pink-500/80 text-white'
-                    }`}>
+                    <span className={`category-badge ${getCategoryColorClass(technique.category)}`}>
                       {technique.categoryName}
                     </span>
                   </div>
@@ -91,11 +87,11 @@ const Home = () => {
         {/* BlackBox Testing Card */}
         <div 
           onClick={() => handleCategoryClick('blackbox')} 
-          className="category-card card-hover bg-white dark:bg-gray-800 overflow-hidden shadow-md rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700 flex flex-col h-full"
+          className={`category-card card-hover bg-white dark:bg-gray-800 overflow-hidden shadow-md rounded-lg cursor-pointer border ${getCategoryCardClass('blackbox')} flex flex-col h-full`}
         >
           <div className="p-5 flex-grow">
             <div className="flex items-center">
-              <div className="icon-gradient">
+              <div className={`${getCategoryIconClass('blackbox')} p-3 rounded-lg`}>
                 <Box className="h-6 w-6" />
               </div>
               <div className="ml-5">
