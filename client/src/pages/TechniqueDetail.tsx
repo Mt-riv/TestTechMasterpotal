@@ -98,7 +98,7 @@ const TechniqueDetail = () => {
             <button 
               onClick={() => setActiveTab("overview")} 
               className={`py-4 px-6 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'overview' 
-                ? 'border-purple-500 text-purple-600 dark:text-purple-400 dark:border-purple-400' 
+                ? 'border-purple-700 text-purple-800 dark:text-purple-300 dark:border-purple-600' 
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-600'}`}
             >
               概要
@@ -106,7 +106,7 @@ const TechniqueDetail = () => {
             <button 
               onClick={() => setActiveTab("example")} 
               className={`py-4 px-6 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'example' 
-                ? 'border-purple-500 text-purple-600 dark:text-purple-400 dark:border-purple-400' 
+                ? 'border-purple-700 text-purple-800 dark:text-purple-300 dark:border-purple-600' 
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-600'}`}
             >
               例
@@ -114,7 +114,7 @@ const TechniqueDetail = () => {
             <button 
               onClick={() => setActiveTab("steps")} 
               className={`py-4 px-6 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'steps' 
-                ? 'border-purple-500 text-purple-600 dark:text-purple-400 dark:border-purple-400' 
+                ? 'border-purple-700 text-purple-800 dark:text-purple-300 dark:border-purple-600' 
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-600'}`}
             >
               適用手順
@@ -122,7 +122,7 @@ const TechniqueDetail = () => {
             <button 
               onClick={() => setActiveTab("benefits")} 
               className={`py-4 px-6 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'benefits' 
-                ? 'border-purple-500 text-purple-600 dark:text-purple-400 dark:border-purple-400' 
+                ? 'border-purple-700 text-purple-800 dark:text-purple-300 dark:border-purple-600' 
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-600'}`}
             >
               メリット・デメリット
@@ -130,7 +130,7 @@ const TechniqueDetail = () => {
             <button 
               onClick={() => setActiveTab("exercise")} 
               className={`py-4 px-6 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'exercise' 
-                ? 'border-purple-500 text-purple-600 dark:text-purple-400 dark:border-purple-400' 
+                ? 'border-purple-700 text-purple-800 dark:text-purple-300 dark:border-purple-600' 
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-600'}`}
             >
               <div className="flex items-center">
