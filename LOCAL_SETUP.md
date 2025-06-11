@@ -35,6 +35,22 @@ npm run dev
 
 ## トラブルシューティング
 
+### エラー: "TypeError [ERR_INVALID_ARG_TYPE]: The "paths[0]" argument must be of type string. Received undefined"
+
+このエラーは Node.js 20未満でのパス解決の問題です。
+
+**解決方法: 互換性モードを使用**
+```bash
+# Unix/Linux/macOS
+./local-dev.sh
+
+# Windows
+local-dev.bat
+
+# または手動で
+node start-local.js
+```
+
 ### エラー: "Cannot resolve module"
 
 **解決方法1: Node.js バージョン確認**

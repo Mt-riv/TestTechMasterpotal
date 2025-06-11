@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 
 // Local development starter with Node.js compatibility
-import { spawn } from 'child_process';
-import { fileURLToPath } from 'url';
-import path from 'path';
-import fs from 'fs';
+const { spawn } = require('child_process');
+const path = require('path');
+const fs = require('fs');
 
 // Get project root directory
 const projectRoot = process.cwd();

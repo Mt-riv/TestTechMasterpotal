@@ -29,7 +29,7 @@ echo "Open http://localhost:$PORT in your browser"
 # Use the local starter for better compatibility
 if [ "$NODE_VERSION" -lt 20 ]; then
     echo "Using compatibility mode for Node.js $NODE_VERSION"
-    node start-local.js
+    node start-local.cjs
 else
     npm run dev
 fi
