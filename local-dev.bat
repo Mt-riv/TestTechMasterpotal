@@ -34,7 +34,7 @@ echo Open http://localhost:%PORT% in your browser
 REM Use compatibility mode for older Node.js versions
 if %NODE_MAJOR% LSS 20 (
     echo Using compatibility mode for Node.js %NODE_VERSION%
-    node start-local.js
+    node start-local.cjs
 ) else (
     npm run dev
 )

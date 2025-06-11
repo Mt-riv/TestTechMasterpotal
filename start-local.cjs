@@ -42,7 +42,7 @@ if (!fs.existsSync(nodeModulesPath)) {
 
 function startServer() {
   // Use the Node.js compatible development server
-  const serverProcess = spawn('node', ['server/dev-server.js'], {
+  const serverProcess = spawn('node', ['server/dev-server.cjs'], {
     cwd: projectRoot,
     stdio: 'inherit',
     shell: process.platform === 'win32',

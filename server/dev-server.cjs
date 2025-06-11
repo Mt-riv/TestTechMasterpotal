@@ -2,13 +2,12 @@
 const express = require('express');
 const { createServer } = require('vite');
 const path = require('path');
-const { fileURLToPath } = require('url');
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 // Get project root using require.resolve for compatibility
-const projectRoot = path.dirname(path.dirname(__filename));
+const projectRoot = path.dirname(__dirname);
 
 async function startDevServer() {
   try {

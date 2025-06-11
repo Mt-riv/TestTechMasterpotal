@@ -48,8 +48,10 @@ npm run dev
 local-dev.bat
 
 # または手動で
-node start-local.js
+node start-local.cjs
 ```
+
+**背景:** Node.js 20未満では `import.meta.dirname` が利用できないため、互換性レイヤーを使用します。
 
 ### エラー: "Cannot resolve module"
 
