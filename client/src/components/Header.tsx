@@ -32,7 +32,7 @@ const Header = () => {
                   >
                     <HelpCircle className="h-5 w-5" />
                     {!hasCompletedTutorial && (
-                      <span className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full animate-pulse" />
+                      <span className="absolute -top-1 -right-1 w-3 h-3 bg-purple-600 rounded-full animate-pulse" />
                     )}
                   </Button>
                 </TooltipTrigger>

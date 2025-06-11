@@ -4,6 +4,7 @@ import { AppContext } from "../context/AppContext";
 import { techniques } from "../data/techniques";
 import { categories } from "../data/categories";
 import { filterTechniques } from "../hooks/useSearch";
+import { getCategoryColorClass } from "../lib/utils";
 
 const CategoryView = () => {
   const { category } = useParams();
@@ -28,7 +29,7 @@ const CategoryView = () => {
         <h2 className="text-2xl font-bold text-gray-900">カテゴリーが見つかりません</h2>
         <p className="mt-4 text-gray-600">指定されたカテゴリーは存在しません。</p>
         <Link href="/">
-          <a className="mt-6 inline-block text-primary-600 hover:text-primary-800">
+          <a className="mt-6 inline-block text-purple-600 hover:text-purple-800">
             ホームに戻る
           </a>
         </Link>
@@ -49,22 +50,17 @@ const CategoryView = () => {
               <div className="p-5">
                 <div className="flex justify-between items-start">
                   <h3 className="text-lg font-bold text-gray-900 dark:text-white">{technique.name}</h3>
-                  <span className={`category-badge ${
-                    technique.category === 'blackbox' ? 'bg-gradient-to-r from-primary/80 to-blue-500/80 text-white' : 
-                    technique.category === 'whitebox' ? 'bg-gradient-to-r from-indigo-500/80 to-blue-600/80 text-white' :
-                    technique.category === 'experience' ? 'bg-gradient-to-r from-amber-500/80 to-orange-500/80 text-white' :
-                    'bg-gradient-to-r from-purple-500/80 to-pink-500/80 text-white'
-                  }`}>
+                  <span className={`category-badge ${getCategoryColorClass(technique.category)}`}>
                     {technique.categoryName}
                   </span>
                 </div>
                 <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">{technique.shortDescription}</p>
                 <div className="mt-4 flex items-center text-sm bg-gray-50 dark:bg-gray-700/50 p-2 rounded-md">
                   <span className="text-gray-700 dark:text-gray-300 mr-4 font-medium">
-                    効果: <span className="text-primary">{technique.effectiveness}</span>
+                    効果: <span className="text-purple-600 dark:text-purple-400">{technique.effectiveness}</span>
                   </span>
                   <span className="text-gray-700 dark:text-gray-300 font-medium">
-                    複雑度: <span className="text-primary">{technique.complexity}</span>
+                    複雑度: <span className="text-purple-600 dark:text-purple-400">{technique.complexity}</span>
                   </span>
                 </div>
               </div>
