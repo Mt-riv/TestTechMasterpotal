@@ -8,6 +8,7 @@ import { ExerciseView } from "../components/exercise/ExerciseView";
 import { BadgeDisplay } from "../components/exercise/BadgeDisplay";
 import { Button } from "@/components/ui/button";
 import { getUserBadges, getExerciseProgress } from "../services/ProgressService";
+import { getCategoryColorClass, getCategoryCardClass, getCategoryIconClass } from "../lib/utils";
 
 const TechniqueDetail = () => {
   const { id, exerciseId } = useParams();
@@ -43,7 +44,7 @@ const TechniqueDetail = () => {
         <h2 className="text-2xl font-bold gradient-heading mb-4">テスト技法が見つかりません</h2>
         <p className="mt-4 text-gray-600 dark:text-gray-300">指定されたテスト技法は存在しません。</p>
         <Link href="/">
-          <a className="mt-8 inline-block px-5 py-3 bg-gradient-to-r from-primary to-purple-600 text-white font-medium rounded-md hover:opacity-90 transition-opacity">
+          <a className="mt-8 inline-block px-5 py-3 bg-gradient-to-r from-purple-600 to-purple-400 text-white font-medium rounded-md hover:opacity-90 transition-opacity">
             ホームに戻る
           </a>
         </Link>
@@ -51,15 +52,7 @@ const TechniqueDetail = () => {
     );
   }
 
-  const getCategoryClassName = (categoryId: string) => {
-    switch (categoryId) {
-      case 'blackbox': return 'bg-primary-100 text-primary-800 dark:bg-primary-900 dark:bg-opacity-30 dark:text-primary-300';
-      case 'whitebox': return 'bg-accent-100 text-accent-800 dark:bg-accent-900 dark:bg-opacity-30 dark:text-accent-300';
-      case 'experience': return 'bg-amber-100 text-amber-800 dark:bg-amber-900 dark:bg-opacity-30 dark:text-amber-300';
-      case 'specialized': return 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:bg-opacity-30 dark:text-purple-300';
-      default: return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
-    }
-  };
+
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -67,7 +60,7 @@ const TechniqueDetail = () => {
       <nav className="mb-6">
         <ol className="flex text-sm">
           <li>
-            <Link href="/" className="text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 cursor-pointer">
+            <Link href="/" className="text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 cursor-pointer">
               ホーム
             </Link>
           </li>
@@ -75,7 +68,7 @@ const TechniqueDetail = () => {
             <ChevronRight className="h-4 w-4" />
           </li>
           <li>
-            <Link href={`/category/${technique.category}`} className="text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 cursor-pointer">
+            <Link href={`/category/${technique.category}`} className="text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 cursor-pointer">
               {category.name}
             </Link>
           </li>
@@ -90,12 +83,7 @@ const TechniqueDetail = () => {
       <div className="mb-6">
         <div className="flex flex-wrap items-center justify-between">
           <h1 className="text-3xl font-bold gradient-heading">{technique.name}</h1>
-          <span className={`mt-2 sm:mt-0 px-3 py-1 text-sm rounded-full category-badge ${
-            technique.category === 'blackbox' ? 'bg-gradient-to-r from-primary/80 to-blue-500/80 text-white' : 
-            technique.category === 'whitebox' ? 'bg-gradient-to-r from-indigo-500/80 to-blue-600/80 text-white' :
-            technique.category === 'experience' ? 'bg-gradient-to-r from-amber-500/80 to-orange-500/80 text-white' :
-            'bg-gradient-to-r from-purple-500/80 to-pink-500/80 text-white'
-          }`}>
+          <span className={`mt-2 sm:mt-0 px-3 py-1 text-sm rounded-full category-badge ${getCategoryColorClass(technique.category)}`}>
             {category.name}
           </span>
         </div>
@@ -110,7 +98,7 @@ const TechniqueDetail = () => {
             <button 
               onClick={() => setActiveTab("overview")} 
               className={`py-4 px-6 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'overview' 
-                ? 'border-primary-500 text-primary-600 dark:text-primary-400 dark:border-primary-400' 
+                ? 'border-purple-500 text-purple-600 dark:text-purple-400 dark:border-purple-400' 
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-600'}`}
             >
               概要
@@ -118,7 +106,7 @@ const TechniqueDetail = () => {
             <button 
               onClick={() => setActiveTab("example")} 
               className={`py-4 px-6 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'example' 
-                ? 'border-primary-500 text-primary-600 dark:text-primary-400 dark:border-primary-400' 
+                ? 'border-purple-500 text-purple-600 dark:text-purple-400 dark:border-purple-400' 
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-600'}`}
             >
               例
@@ -126,7 +114,7 @@ const TechniqueDetail = () => {
             <button 
               onClick={() => setActiveTab("steps")} 
               className={`py-4 px-6 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'steps' 
-                ? 'border-primary-500 text-primary-600 dark:text-primary-400 dark:border-primary-400' 
+                ? 'border-purple-500 text-purple-600 dark:text-purple-400 dark:border-purple-400' 
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-600'}`}
             >
               適用手順
@@ -134,7 +122,7 @@ const TechniqueDetail = () => {
             <button 
               onClick={() => setActiveTab("benefits")} 
               className={`py-4 px-6 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'benefits' 
-                ? 'border-primary-500 text-primary-600 dark:text-primary-400 dark:border-primary-400' 
+                ? 'border-purple-500 text-purple-600 dark:text-purple-400 dark:border-purple-400' 
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-600'}`}
             >
               メリット・デメリット
@@ -142,7 +130,7 @@ const TechniqueDetail = () => {
             <button 
               onClick={() => setActiveTab("exercise")} 
               className={`py-4 px-6 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'exercise' 
-                ? 'border-primary-500 text-primary-600 dark:text-primary-400 dark:border-primary-400' 
+                ? 'border-purple-500 text-purple-600 dark:text-purple-400 dark:border-purple-400' 
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-600'}`}
             >
               <div className="flex items-center">
@@ -153,7 +141,7 @@ const TechniqueDetail = () => {
             <button 
               onClick={() => setActiveTab("badges")} 
               className={`py-4 px-6 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'badges' 
-                ? 'border-primary-500 text-primary-600 dark:text-primary-400 dark:border-primary-400' 
+                ? 'border-purple-500 text-purple-600 dark:text-purple-400 dark:border-purple-400' 
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-600'}`}
             >
               <div className="flex items-center">
